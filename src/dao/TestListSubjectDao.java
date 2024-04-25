@@ -17,68 +17,7 @@ public class TestListSubjectDao {
 	 */
 	private String baseSql = "select * from subject";
 
-	/**
-	 * getメソッド 科目コード、学校コードを指定して科目インスタンスを1件取得する
-	 *
-	 * @param cd:String 科目コード
-	 * @param school:School 学校コード
-	 * @return 科目クラスのインスタンス 存在しない場合はnull
-	 * @throws Exception
-	 */
-	public Subject get(String cd,School school) throws Exception{
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		//結果を格納するsubjectを初期化
-		Subject subject = new Subject();
-
-		String condition = "school_cd=? and subject_cd=?";
-
-		try {
-			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition);
-			//プレースホルダに科目コード、学校コードをバインド
-			statement.setString(1, cd);
-			statement.setString(2, school.getCd());
-			ResultSet rSet = statement.executeQuery();
-
-			//Schoolの格納に使用
-			SchoolDao schoolDao = new SchoolDao();
-
-			if(rSet.next()){
-				subject.setCd(rSet.getString("subject_cd"));
-				subject.setName(rSet.getString("name"));
-				subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
-			} else {
-				subject = null;
-			}
-
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-
-		//コネクションを閉じる
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (SQLException sqle) {
-				throw sqle;
-			}
-		}
-	}
-	return subject;
-
-	}
-
-
+	
 	/**
 	 * filterメソッド 学校を指定して科目の一覧を取得する
 	 *
