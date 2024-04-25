@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
+import bean.Student;
 import bean.Subject;
+import bean.TestListSubject;
 
 public class TestListSubjectDao {
 
@@ -17,65 +19,26 @@ public class TestListSubjectDao {
 	 */
 	private String baseSql = "select * from subject";
 
-	/**
-	 * getメソッド 科目コード、学校コードを指定して科目インスタンスを1件取得する
-	 *
-	 * @param cd:String 科目コード
-	 * @param school:School 学校コード
-	 * @return 科目クラスのインスタンス 存在しない場合はnull
-	 * @throws Exception
-	 */
-	public Subject get(String cd,School school) throws Exception{
-		Connection connection = getConnection();
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-		//結果を格納するsubjectを初期化
-		Subject subject = new Subject();
 
-		String condition = "school_cd=? and subject_cd=?";
-
+	private List<Student> postFilter(ResultSet rSet, School school) throws Exception {
+		//リストを初期化
+		List<Student> list = new ArrayList<>();
 		try {
-			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition);
-			//プレースホルダに科目コード、学校コードをバインド
-			statement.setString(1, cd);
-			statement.setString(2, school.getCd());
-			ResultSet rSet = statement.executeQuery();
+			while (rSet.next()) {
+				Student student = new Student();
 
-			//Schoolの格納に使用
-			SchoolDao schoolDao = new SchoolDao();
-
-			if(rSet.next()){
-				subject.setCd(rSet.getString("subject_cd"));
-				subject.setName(rSet.getString("name"));
-				subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
-			} else {
-				subject = null;
+				student.setNo(rSet.getString("no"));
+				student.setName(rSet.getString("name"));
+				student.setEntYear(rSet.getInt("ent_year"));
+				student.setClassNum(rSet.getString("class_num"));
+				student.setAttend(rSet.getBoolean("is_attend"));
+				student.setSchool(school);
+				list.add(student);
 			}
-
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-
-		//コネクションを閉じる
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (SQLException sqle) {
-				throw sqle;
-			}
+		} catch (SQLException | NullPointerException e) {
+			e.printStackTrace();
 		}
-	}
-	return subject;
-
+		return list;
 	}
 
 
@@ -85,8 +48,8 @@ public class TestListSubjectDao {
 	 * @return 科目のリスト:List<Subject> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<Subject> filter(School school) throws Exception {
-		List<Subject> list = new ArrayList<>();
+	public List<TestListSubject> filter(int entYear, String classNum, Subject subject School school) throws Exception {
+		List<TestListSubject> list = new ArrayList<>();
 
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
