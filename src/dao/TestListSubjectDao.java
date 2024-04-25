@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
+import bean.Student;
 import bean.Subject;
+import bean.TestListSubject;
 
 public class TestListSubjectDao {
 
@@ -17,15 +19,37 @@ public class TestListSubjectDao {
 	 */
 	private String baseSql = "select * from subject";
 
-	
+
+	private List<Student> postFilter(ResultSet rSet, School school) throws Exception {
+		//リストを初期化
+		List<Student> list = new ArrayList<>();
+		try {
+			while (rSet.next()) {
+				Student student = new Student();
+
+				student.setNo(rSet.getString("no"));
+				student.setName(rSet.getString("name"));
+				student.setEntYear(rSet.getInt("ent_year"));
+				student.setClassNum(rSet.getString("class_num"));
+				student.setAttend(rSet.getBoolean("is_attend"));
+				student.setSchool(school);
+				list.add(student);
+			}
+		} catch (SQLException | NullPointerException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
 	/**
 	 * filterメソッド 学校を指定して科目の一覧を取得する
 	 *
 	 * @return 科目のリスト:List<Subject> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
-	public List<Subject> filter(School school) throws Exception {
-		List<Subject> list = new ArrayList<>();
+	public List<TestListSubject> filter(int entYear, String classNum, Subject subject School school) throws Exception {
+		List<TestListSubject> list = new ArrayList<>();
 
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
