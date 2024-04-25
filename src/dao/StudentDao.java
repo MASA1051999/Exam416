@@ -126,7 +126,7 @@ public class StudentDao  extends Dao{
 	public List<Student> filter(School school, int entYear, String classNum, boolean isAttend) throws Exception {
 		List<Student> list = new ArrayList<>();
 
-		//データベースへのコネクションを確率
+		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 
 		//プリペアードステートメント
