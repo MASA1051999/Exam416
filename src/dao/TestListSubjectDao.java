@@ -20,9 +20,9 @@ public class TestListSubjectDao {
 	private String baseSql = "select * from subject";
 
 
-	private List<Student> postFilter(ResultSet rSet, School school) throws Exception {
+	private List<TestListSubject> postFilter(ResultSet rSet) throws Exception {
 		//リストを初期化
-		List<Student> list = new ArrayList<>();
+		List<TestListSubject> list = new ArrayList<>();
 		try {
 			while (rSet.next()) {
 				Student student = new Student();
