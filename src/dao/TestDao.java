@@ -20,7 +20,7 @@ public class TestDao extends Dao {
 		//結果を格納するtestを初期化
 		Test test = new Test();
 		//結果を格納するschoolDaoを初期化
-		SchoolDao schoolDao = new SchoolDao();
+		SchoolDao sch = new SchoolDao();
 		//結果を格納するstuを初期化
 		StudentDao stu = new StudentDao();
 		//結果を格納するsubjectを初期化
@@ -48,8 +48,8 @@ public class TestDao extends Dao {
 
 			if(rSet.next()){
 				test.setStudent(stu.get(rSet.getString("student_no")));
-				test.setSchool(schoolDao.get(rSet.getString("school_cd")));
-				test.setSubject(subjectDao.get(rSet.getString("subject_cd")));
+				test.setSchool(sch.get(rSet.getString("school_cd")));
+				test.setSubject(sub.get(rSet.getString("subject_cd")));
 			} else {
 				test = null;
 			}
