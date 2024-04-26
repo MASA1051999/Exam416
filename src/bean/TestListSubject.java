@@ -6,18 +6,33 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 public class TestListSubject implements Serializable{
 
+	/**
+	 * student
+	 */
 	private int entYear;
 
 
+	/**
+	 * student
+	 */
 	private String studentNo;
 
 
+	/**
+	 * student
+	 */
 	private String studentName;
 
 
+	/**
+	 * student
+	 */
 	private String classNum;
 
 
+	/**
+	 * test
+	 */
 	private Map<Integer, Integer> points;
 
 
