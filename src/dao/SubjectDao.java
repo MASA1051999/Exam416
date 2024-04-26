@@ -98,7 +98,7 @@ public class SubjectDao extends Dao{
 
 		String condition = "school_cd=?";
 
-		String order = " order by school_cd asc,subject_cd asc";
+		String order = " order by subject_cd asc";
 
 		try{
 
@@ -171,7 +171,7 @@ public class SubjectDao extends Dao{
 		try{
 			Subject old = get(subject.getCd(),subject.getSchool());
 			//データが存在しないなら追加、存在するなら更新
-			if (old != null) {
+			if (old == null) {
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("insert into subject(school,subject,name) values(?, ?, ?)");
 
@@ -180,12 +180,10 @@ public class SubjectDao extends Dao{
 			statement.setString(2, subject.getCd());
 			statement.setString(3, subject.getName());
 			} else {
-				statement = connection.prepareStatement("update subject set school_cd=?,subject_cd=?,name=? where school_cd=? and subject_cd=?");
-				statement.setString(1, school.getCd());
-				statement.setString(2, subject.getCd());
-				statement.setString(3, subject.getName());
-				statement.setString(4, school.getCd());
-				statement.setString(5, subject.getCd());
+				statement = connection.prepareStatement("update subject set name=? where school_cd=? and subject_cd=?");
+				statement.setString(1, subject.getName());
+				statement.setString(2, school.getCd());
+				statement.setString(3, subject.getCd());
 
 			}
 
