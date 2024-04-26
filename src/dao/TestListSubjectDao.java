@@ -43,7 +43,7 @@ public class TestListSubjectDao {
 
 
 	/**
-	 * filterメソッド 学校を指定して科目別テスト結果の一覧を取得する
+	 * filterメソッド 入学年度、クラス、科目、（学校）を指定して科目別テスト結果の一覧を取得する
 	 *
 	 * @return 科目別テスト結果のリスト:List<TestListSubject> 存在しない場合は0件のリスト
 	 * @throws Exception
@@ -59,7 +59,7 @@ public class TestListSubjectDao {
 
 		ResultSet rSet = null;
 
-		String condition = "school_cd=?";
+		String condition = "where school_cd=? and class_num=? and subject=? and ent_year=? and";
 
 		String order = " order by school_cd asc,subject_cd asc";
 
