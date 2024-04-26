@@ -24,10 +24,10 @@
 			</tr>
 			<c:forEach var="subject" items="${subjects}">
 				<tr>
-					<td>${subject.subject_cd}</td>
+					<td>${subject.cd}</td>
 					<td>${subject.name}</td>
-					<td><a href="SubjectUpdate.action?subject_cd=${subject.subject_cd}">変更</a></td>
-					<td><a href="SubjectDelete.action?subject_cd=${subject.subject_cd}">削除</a>
+					<td><a href="SubjectUpdate.action">変更</a></td>
+					<td><a href="SubjectDelete.action">削除</a>
 				</tr>
 			</c:forEach>
 		</table>
