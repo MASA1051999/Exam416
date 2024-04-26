@@ -336,6 +336,7 @@ public class StudentDao  extends Dao{
 
 				try{
 					Student old = get(student.getNo());
+					//存在しないなら追加、存在するなら更新
 					if (old == null) {
 					//プリペアードステートメントにSQL文をセット
 					statement = connection.prepareStatement("insert into student(no, name, ent_year, class_num, is_attend, school_cd) values(?, ?, ? ,?, ?, ?)");

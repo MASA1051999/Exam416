@@ -170,7 +170,8 @@ public class SubjectDao extends Dao{
 
 		try{
 			Subject old = get(subject.getCd(),subject.getSchool());
-			if (old == null) {
+			//データが存在しないなら追加、存在するなら更新
+			if (old != null) {
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("insert into subject(school,subject,name) values(?, ?, ?)");
 
@@ -242,7 +243,8 @@ public class SubjectDao extends Dao{
 
 		try{
 			Subject old = get(subject.getCd(),subject.getSchool());
-			if (old == null) {
+			//データが存在するなら削除
+			if (old != null) {
 			//プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("delete from subject where school_cd=? and subject_cd=?");
 
