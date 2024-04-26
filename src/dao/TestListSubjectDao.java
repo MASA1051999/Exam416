@@ -61,7 +61,7 @@ public class TestListSubjectDao {
 
 		String condition = "where school_cd=? and class_num=? and subject=? and ent_year=? and";
 
-		String order = " order by school_cd asc,subject_cd asc";
+		String order = " order by school_cd asc";
 
 		try{
 
