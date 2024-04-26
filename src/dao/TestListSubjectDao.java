@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.School;
 import bean.Subject;
@@ -18,16 +20,19 @@ public class TestListSubjectDao {
 		List<TestListSubject> list = new ArrayList<>();
 		TestListSubject tls = new TestListSubject();
 		StudentDao sDao = new StudentDao();
+
 		try {
 			while (rSet.next()) {
+				//mapの初期化
+				Map<Integer, Integer> map = new HashMap<Integer,Integer>();
+
 				tls.setEntYear(rSet.getInt("ent_year"));;
 				tls.setStudentNo(rSet.getString("no"));
 				tls.setStudentName(rSet.getString("name"));
-
-				student.setClassNum(rSet.getString("class_num"));
-				student.setAttend(rSet.getBoolean("is_attend"));
-				student.setSchool(school);
-				list.add(student);
+				tls.setClassNum(rSet.getString("class_num"));
+				map.put(rSet.getInt("no"),rSet.getInt("point"));
+				tls.setPoints(map);
+				list.add(tls);
 			}
 		} catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
@@ -81,14 +86,8 @@ public class TestListSubjectDao {
 			rSet = statement.executeQuery();
 
 			//結果をリストに格納
-			//入学年度、クラス、学生番号、氏名、１回目、２回目の点数を格納
-			while (rSet.next()) {
-				TestListSubject testlistsubject = new TestListSubject();
-				subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
-				subject.setCd(rSet.getString("subject_co"));
-				subject.setName(rSet.getString("name"));
-				list.add(subject);
-			}
+			list.addAll(postFilter(rSet));
+
 		} catch (Exception e) {
 			throw e;
 		} finally {

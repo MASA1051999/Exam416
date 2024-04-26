@@ -1,8 +1,7 @@
 package bean;
 
 import java.io.Serializable;
-
-import com.sun.javafx.collections.MappingChange.Map;
+import java.util.Map;
 
 public class TestListSubject implements Serializable{
 
