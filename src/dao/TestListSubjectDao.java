@@ -66,7 +66,7 @@ public class TestListSubjectDao {
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			//絞り込みは入学年度、クラス、科目の組み合わせの8パターン必要
+			//入学年度、クラス、科目で絞り込み
 			statement = connection.prepareStatement(baseSql + condition + order);
 
 			//プレースホルダー（？の部分）に値を設定
