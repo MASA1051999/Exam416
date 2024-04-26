@@ -2,7 +2,7 @@ package bean;
 
 import java.io.Serializable;
 
-import javax.security.auth.Subject;
+import bean.Subject;
 
 public class Test implements Serializable {
 
