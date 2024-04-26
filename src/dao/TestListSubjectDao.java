@@ -62,7 +62,7 @@ public class TestListSubjectDao {
 		String baseSql = "select * from student join test on student.no =test.student_no";
 
 		//条件指定
-		String condition = "where school_cd=? and class_num=? and subject_no=? and ent_year=? and";
+		String condition = " where school_cd=? and class_num=? and subject_no=? and ent_year=? and";
 
 		//学生コードの昇順
 		String order = " order by school_cd asc";
