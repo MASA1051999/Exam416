@@ -166,6 +166,71 @@ public class TestDao extends Dao {
 	}
 	return list;
 	}
+
+	public boolean save(List<Test> list) throws Exception {
+		//学校コードの取得に使用
+		School school = subject.getSchool();
+		//データベースへのコネクションを確立
+		Connection connection = getConnection();
+
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+
+		int count =0;
+
+		try{
+			Subject old = get(subject.getCd(),subject.getSchool());
+			//データが存在しないなら追加、存在するなら更新
+			if (old != null) {
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("insert into subject(school,subject,name) values(?, ?, ?)");
+
+			//プレースホルダー（？の部分）に値を設定
+			statement.setString(1, school.getCd());
+			statement.setString(2, subject.getCd());
+			statement.setString(3, subject.getName());
+			} else {
+				statement = connection.prepareStatement("update subject set school_cd=?,subject_cd=?,name=? where school_cd=? and subject_cd=?");
+				statement.setString(1, school.getCd());
+				statement.setString(2, subject.getCd());
+				statement.setString(3, subject.getName());
+				statement.setString(4, school.getCd());
+				statement.setString(5, subject.getCd());
+
+			}
+
+
+		//プリペアードステートメントを実行
+		//SQL文を実行する
+		//結果は実行した列数
+		count = statement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			//プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+			//コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 
