@@ -98,7 +98,7 @@ public class SubjectDao extends Dao{
 
 		String condition = "school_cd=?";
 
-		String order = " order by school_cd asc,subject_cd asc";
+		String order = " order by subject_cd asc";
 
 		try{
 
