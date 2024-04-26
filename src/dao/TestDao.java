@@ -166,9 +166,6 @@ public class TestDao extends Dao {
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-
 		int count =0;
 		//値がカウントされたら失敗する
 		try{
