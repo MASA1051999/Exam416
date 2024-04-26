@@ -2,8 +2,6 @@ package bean;
 
 import java.io.Serializable;
 
-import javax.security.auth.Subject;
-
 public class Test implements Serializable {
 
 	private Student student;
