@@ -32,7 +32,7 @@ public class SubjectDao extends Dao{
 		//結果を格納するsubjectを初期化
 		Subject subject = new Subject();
 
-		String condition = "school_cd=? and subject_cd=?";
+		String condition = " school_cd=? and subject_cd=?";
 
 		try {
 			//プリペアードステートメントにSQL文をセット
@@ -96,7 +96,7 @@ public class SubjectDao extends Dao{
 
 		ResultSet rSet = null;
 
-		String condition = "school_cd=?";
+		String condition = " where school_cd=?";
 
 		String order = " order by subject_cd asc";
 
@@ -120,7 +120,7 @@ public class SubjectDao extends Dao{
 					Subject subject = new Subject();
 
 					subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
-					subject.setCd(rSet.getString("subject_co"));
+					subject.setCd(rSet.getString("subject_cd"));
 					subject.setName(rSet.getString("name"));
 					list.add(subject);
 				}

@@ -19,7 +19,6 @@ public class TestListSubjectDao {
 		//リストを初期化
 		List<TestListSubject> list = new ArrayList<>();
 		TestListSubject tls = new TestListSubject();
-		StudentDao sDao = new StudentDao();
 
 		try {
 			while (rSet.next()) {
