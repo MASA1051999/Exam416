@@ -81,7 +81,7 @@ public class TeacherDao extends Dao{
 	 *
 	 * @param id:String 教員ID
 	 * @param password:String パスワード
-	 * @return 教員クラスのインスタンス 存在しない場合はnull]
+	 * @return 教員クラスのインスタンス 存在しない場合はnull
 	 * @throws Exception
 	 */
 	public Teacher login(String id,String password)throws Exception{

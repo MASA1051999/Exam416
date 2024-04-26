@@ -5,35 +5,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.School;
-import bean.Student;
 import bean.Subject;
 import bean.TestListSubject;
 
 public class TestListSubjectDao {
 
-	/**
-	 * baseSql:String 共通SQL文 プライベート
-	 */
-	private String baseSql = "select * from subject";
-
-
 	private List<TestListSubject> postFilter(ResultSet rSet) throws Exception {
 		//リストを初期化
 		List<TestListSubject> list = new ArrayList<>();
+		TestListSubject tls = new TestListSubject();
+
 		try {
 			while (rSet.next()) {
-				Student student = new Student();
+				//mapの初期化
+				Map<Integer, Integer> map = new HashMap<Integer,Integer>();
 
-				student.setNo(rSet.getString("no"));
-				student.setName(rSet.getString("name"));
-				student.setEntYear(rSet.getInt("ent_year"));
-				student.setClassNum(rSet.getString("class_num"));
-				student.setAttend(rSet.getBoolean("is_attend"));
-				student.setSchool(school);
-				list.add(student);
+				tls.setEntYear(rSet.getInt("ent_year"));;
+				tls.setStudentNo(rSet.getString("no"));
+				tls.setStudentName(rSet.getString("name"));
+				tls.setClassNum(rSet.getString("class_num"));
+				map.put(rSet.getInt("no"),rSet.getInt("point"));
+				tls.setPoints(map);
+				list.add(tls);
 			}
 		} catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
@@ -43,13 +41,14 @@ public class TestListSubjectDao {
 
 
 	/**
-	 * filterメソッド 入学年度、クラス、科目、（学校）を指定して科目別テスト結果の一覧を取得する
-	 *
+	 * filterメソッド 入学年度、クラス、科目名、（学校）を指定して科目別テスト結果の一覧を取得する
+	 *test,student,subjectをjoinする。
 	 * @return 科目別テスト結果のリスト:List<TestListSubject> 存在しない場合は0件のリスト
 	 * @throws Exception
 	 */
 	public List<TestListSubject> filter(int entYear, String classNum, Subject subject, School school) throws Exception {
 		List<TestListSubject> list = new ArrayList<>();
+		SubjectDao sDao = new SubjectDao();
 
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
@@ -59,9 +58,14 @@ public class TestListSubjectDao {
 
 		ResultSet rSet = null;
 
-		String condition = "where school_cd=? and class_num=? and subject=? and ent_year=? and";
+		//studentとtestをschool_cdでjoinする。
+		String baseSql = "select * from student join test on student.no =test.student_no";
 
-		String order = " order by school_cd asc,subject_cd asc";
+		//条件指定
+		String condition = "where school_cd=? and class_num=? and subject_no=? and ent_year=? and";
+
+		//学生コードの昇順
+		String order = " order by school_cd asc";
 
 		try{
 
@@ -71,23 +75,18 @@ public class TestListSubjectDao {
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, school.getCd());
+			statement.setString(2, classNum);
+			statement.setString(3, subject.getCd());
+			statement.setInt(4, entYear);
 
 			//プリペアードステートメントを実行
 			//SQL文を実行する
 			//結果はリザルトセット型となる
 			rSet = statement.executeQuery();
-				//Schoolの格納に使用
-				SchoolDao schoolDao = new SchoolDao();
 
-				//結果をリストに格納
-				//入学年度、クラス、学生番号、氏名、１回目、２回目の点数を格納
-				while (rSet.next()) {
-					TestListSubject testlistsubject = new TestListSubject();
-					subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
-					subject.setCd(rSet.getString("subject_co"));
-					subject.setName(rSet.getString("name"));
-					list.add(subject);
-				}
+			//結果をリストに格納
+			list.addAll(postFilter(rSet));
+
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -118,13 +117,4 @@ public class TestListSubjectDao {
 		return null;
 	}
 
-
-	/**
-	 * saveメソッド 科目インスタンスをデータベースに保存する データが存在する場合は更新、存在しない場合は登録
-	 *
-	 * @param subject：Subject
-	 *            学生
-	 * @return 成功:true, 失敗:false
-	 * @throws Exception
-	 */
 }
