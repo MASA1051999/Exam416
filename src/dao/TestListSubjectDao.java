@@ -10,6 +10,7 @@ import java.util.List;
 import bean.School;
 import bean.Student;
 import bean.Subject;
+import dao.SubjectDao;
 import bean.TestListSubject;
 
 public class TestListSubjectDao {
@@ -50,7 +51,7 @@ public class TestListSubjectDao {
 	 */
 	public List<TestListSubject> filter(int entYear, String classNum, Subject subject, School school) throws Exception {
 		List<TestListSubject> list = new ArrayList<>();
-
+		SubjectDao sDao = new SubjectDao();
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 
@@ -71,6 +72,8 @@ public class TestListSubjectDao {
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, school.getCd());
+			statement.setString(2, classNum);
+			statement.setString(3, );
 
 			//プリペアードステートメントを実行
 			//SQL文を実行する
