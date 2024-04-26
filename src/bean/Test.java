@@ -2,11 +2,7 @@ package bean;
 
 import java.io.Serializable;
 
-<<<<<<< HEAD
-import bean.Subject;
 
-=======
->>>>>>> branch 'master' of https://github.com/MASA1051999/Exam416.git
 public class Test implements Serializable {
 
 	private Student student;
