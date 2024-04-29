@@ -13,11 +13,6 @@ import bean.Subject;
 public class SubjectDao extends Dao{
 
 	/**
-	 * baseSql:String 共通SQL文 プライベート
-	 */
-	private String baseSql = "select * from subject";
-
-	/**
 	 * getメソッド 科目コード、学校コードを指定して科目インスタンスを1件取得する
 	 *
 	 * @param cd:String 科目コード
@@ -32,11 +27,9 @@ public class SubjectDao extends Dao{
 		//結果を格納するsubjectを初期化
 		Subject subject = new Subject();
 
-		String condition = " school_cd=? and subject_cd=?";
-
 		try {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition);
+			statement = connection.prepareStatement("select * from subject where subject_cd=? and school_cd=?");
 			//プレースホルダに科目コード、学校コードをバインド
 			statement.setString(1, cd);
 			statement.setString(2, school.getCd());
@@ -103,7 +96,7 @@ public class SubjectDao extends Dao{
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + condition + order);
+			statement = connection.prepareStatement("select * from subject" + condition + order);
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, school.getCd());
@@ -173,7 +166,7 @@ public class SubjectDao extends Dao{
 			//データが存在しないなら追加、存在するなら更新
 			if (old == null) {
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("insert into subject(school,subject,name) values(?, ?, ?)");
+			statement = connection.prepareStatement("insert into subject(school_cd,subject_cd,name) values(?, ?, ?)");
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, school.getCd());
