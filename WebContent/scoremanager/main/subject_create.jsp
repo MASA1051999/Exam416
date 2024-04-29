@@ -11,9 +11,9 @@
 
 	<form action = "SubjectCreateExecute.action" method="post">
 		<label>科目コード</label>
-		<%-- 科目コードの属性名はsubject_cd --%>
-		<input type="text" name="subject_cd"
-			placeholder="科目コードを入力してください" maxlength="10" value="${subject_cd}" required />
+		<%-- 科目コードの属性名はcd --%>
+		<input type="text" name="cd"
+			placeholder="科目コードを入力してください" maxlength="10" value="${cd}" required />
 
 		<%-- 科目コードが3文字で無かった場合のエラー表示 --%>
 		<div>${errors.get("subject_error1")}</div>

@@ -14,13 +14,12 @@ import tool.Action;
 
 public class SubjectCreateExecuteAction extends Action {
 
-	@SuppressWarnings("null")
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession();//セッション
-		String subject_cd = "";//科目コード
+		String cd = "";//科目コード
 		String name = "";//科目名
 		Subject subject = new Subject();//科目インスタンス
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
@@ -28,17 +27,17 @@ public class SubjectCreateExecuteAction extends Action {
 		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザーを取得
 
 		//リクエストパラメータ―の取得 2
-		subject_cd = req.getParameter("subject_cd");//科目コード
+		cd = req.getParameter("cd");//科目コード
 		name = req.getParameter("name");//科目名
 
 		//DBからデータ取得 3
 		// リクエストパラメータの科目コードをもとに科目インスタンスを取得
-		Subject old = sDao.get(subject_cd, teacher.getSchool());
+		Subject old = sDao.get(cd, teacher.getSchool());
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
 		//条件で手順4~5の内容が分岐
-		if(subject_cd.length() != 3){//科目コードが3文字でない場合
+		if(cd.length() != 3){//科目コードが3文字でない場合
 			errors.put("subject_error1","科目コードは3文字で入力してください" );
 
 		}else if(old != null){//科目コードが重複していた場合
@@ -46,7 +45,7 @@ public class SubjectCreateExecuteAction extends Action {
 
 		}else{//エラーが無かった場合
 			//科目インスタンスに値をセット
-			subject.setCd(subject_cd);
+			subject.setCd(cd);
 			subject.setName(name);
 			subject.setSchool(teacher.getSchool());
 			sDao.save(subject);
@@ -60,7 +59,7 @@ public class SubjectCreateExecuteAction extends Action {
 		if(!errors.isEmpty()){
 			// リクエスト属性をセット
 			req.setAttribute("errors", errors);
-			req.setAttribute("subject_cd", subject_cd);
+			req.setAttribute("cd", cd);
 			req.setAttribute("name", name);
 			req.getRequestDispatcher("subject_create.jsp").forward(req, res);
 			return;
