@@ -181,13 +181,13 @@ public class TestDao extends Dao {
 			throw e;
 		} finally {
 			//プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+//			if (statement != null) {
+//				try {
+//					statement.close();
+//				} catch (SQLException sqle) {
+//					throw sqle;
+//				}
+//			}
 
 			//コネクションを閉じる
 			if (connection != null) {
@@ -273,61 +273,63 @@ public class TestDao extends Dao {
 				}
 
 	}
-	public boolean delete(List<Test> list) throws Exception {
 
-		//データベースへのコネクションを確立
-		Connection connection = getConnection();
-
-		//プリペアードステートメント
-		PreparedStatement statement = null;
-
-		int count =0;
-
-		try{
-			Test old = get(list.getClass());
-			//データが存在するなら削除
-			if (old != null) {
-			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("delete from subject where school_cd=? and subject_cd=?");
-
-			//プレースホルダー（？の部分）に値を設定
-			statement.setString(1, school.getCd());
-			statement.setString(2, subject.getCd());
-			}
-
-		//プリペアードステートメントを実行
-		//SQL文を実行する
-		//結果は実行した列数
-		count = statement.executeUpdate();
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-
-			//コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
-		if (count > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }
-
+//	public boolean delete(List<Test> list) throws Exception {
+//
+//		//データベースへのコネクションを確立
+//		Connection connection = getConnection();
+//
+//		//プリペアードステートメント
+//		PreparedStatement statement = null;
+//
+//		int count =0;
+//
+//		try{
+//			Test old = get(list.getClass());
+//			//データが存在するなら削除
+//			if (old != null) {
+//			//プリペアードステートメントにSQL文をセット
+//			statement = connection.prepareStatement("delete from subject where school_cd=? and subject_cd=?");
+//
+//			//プレースホルダー（？の部分）に値を設定
+//			statement.setString(1, school.getCd());
+//			statement.setString(2, subject.getCd());
+//			}
+//
+//		//プリペアードステートメントを実行
+//		//SQL文を実行する
+//		//結果は実行した列数
+//		count = statement.executeUpdate();
+//		} catch (Exception e) {
+//			throw e;
+//		} finally {
+//			//プリペアードステートメントを閉じる
+//			if (statement != null) {
+//				try {
+//					statement.close();
+//				} catch (SQLException sqle) {
+//					throw sqle;
+//				}
+//			}
+//
+//			//コネクションを閉じる
+//			if (connection != null) {
+//				try {
+//					connection.close();
+//				} catch (SQLException sqle) {
+//					throw sqle;
+//				}
+//			}
+//		}
+//		if (count > 0) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+//}
+//
 
 
 
