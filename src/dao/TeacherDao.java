@@ -108,9 +108,9 @@ public class TeacherDao extends Dao{
 
 			//取得した教員ID、パスワード、教員名、学校コードをteacherインスタンスに保存
 			if(rSet.next()) {
-				teacher.setId(rSet.getString("teacher_id"));
-				teacher.setPassword("password");
-				teacher.setName("name");
+				teacher.setId(id);
+				teacher.setPassword(password);
+				teacher.setName(rSet.getString("name"));
 				teacher.setSchool(schoolDao.get("school_cd"));
 			} else {
 				//対応する教員がいない場合はnullを返す
