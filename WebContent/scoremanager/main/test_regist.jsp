@@ -76,8 +76,6 @@
 							<%-- 0～100の範囲で入力してください、と表示する --%>
 							<div>${errors.get("test_error")}</div>
 						</td>
-
-						<td><a href="StudentUpdate.action?no=${student.no}">変更</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -85,7 +83,7 @@
 	</c:choose>
 
 
-	<input type="button" href="TestRegistExecute.action">登録して終了</a>
+	<input type="button"><a href="TestRegistExecute.action">登録して終了</a>
 
 </body>
 </html>
