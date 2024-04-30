@@ -50,11 +50,11 @@ public class LoginAction extends Action{
 		//レスポンス値をセット 6
 		//なし
 		//JSPへフォワード 7
-		//req.getRequestDispatcher("main/Menu.action").forward(req, res);
+		req.getRequestDispatcher("login.jsp").forward(req, res);
 
 		//リダイレクト
-		url = "main/Menu.action";
-		res.sendRedirect(url);
+		//url = "main/Menu.action";
+		//res.sendRedirect(url);
 	}
 
 }

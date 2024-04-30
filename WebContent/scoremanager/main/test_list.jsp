@@ -29,12 +29,12 @@
 			<label>科目</label>>
 			<select name="f3">
 				<c:forEach var="subject" items="${subject.name}">
-					<option value="${subject.name}">
+					<option value="${subject.cd}">
 				</c:forEach>
 			</select>
 
 
-		<button type="submit">検索</button>
+		<button>検索</button>
 	</form>
 
 	<form action="TestListStudentExecute.action" method="post">
