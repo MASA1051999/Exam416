@@ -11,27 +11,33 @@
 <body>
 	<h2>成績管理</h2>
 	<form action = "TestRegist.action" method="post">
+
 		<label>入学年度</label>
 		<select name="f1">
 			<c:forEach var="ent_year" items="${year}">
+				<option value="${ent_year}">
 			</c:forEach>
+		</select>
 
 		<label>クラス</label>
 		<select name="f2">
 			<c:forEach var="class" items="${num}">
+				<option value="">
 			</c:forEach>
-
-		<label>科目</label>
-		<select name="f3">
-			<c:forEach var="subject" items="${subject.name}"></c:forEach>
 		</select>
 
-		<label>回数</label>
+		<label>科目</label>>
+		<select name="f3">
+			<c:forEach var="subject" items="${subject.name}">
+			</c:forEach>
+		</select>
+
+		<label>回数</label>>
 		<select name="f4">
 			<c:forEach var="num" items="${no}"></c:forEach>
 		</select>
 
-		<input type="submit" value="検索">
+		<button type="submit">検索</button>
 	</form>
 
 	<%-- testキーに保存された内容を表示 --%>
