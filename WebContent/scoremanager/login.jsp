@@ -30,14 +30,6 @@
 	<label>パスワード</label>
 	<input type="password" name="password" value="111">
 
-	<!-- 名前 -->
-	<label>名前</label>
-	<input type="text" name="namae" value="紀平 泰三">
-
-	<!-- 学校コード -->
-	<label>学校コード</label>
-	<input type="text" name="school_cd" value="knz">
-
 	<!-- ログイン用ボタン -->
 	<input type="submit" name="login" value="ログイン"/>
 

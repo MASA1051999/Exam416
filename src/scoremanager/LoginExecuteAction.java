@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Teacher;
+import dao.TeacherDao;
 import tool.Action;
 
 public class LoginExecuteAction extends Action{
@@ -14,36 +14,32 @@ public class LoginExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
 		String url = "";
-
+		//
+		//入力された教員のインスタンスを初期化
 		Teacher teacher = new Teacher();
-		School school = new School();
+		//照合する教員インスタンスの取得に使うDao
+		TeacherDao tDao = new TeacherDao();
 
 		//リクエストパラメータ―の取得 2
+		//確認するid、パスワードを取得
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
-		String name = req.getParameter("namae");
-		String school_cd = req.getParameter("school_cd");
 
 		//DBからデータ取得 3
-		//なし
+		//入力されたidをもとに教員インスタンスを取得 存在しない場合はnull
+		teacher = tDao.login(id,password);
+
 		//ビジネスロジック 4
+		//教員idとpasswordが正しい場合(教員インスタンスが存在する場合)
+		if(teacher != null){
+			// 認証済みフラグを立てる
+			teacher.setAuthenticated(true);
+			//Sessionを有効にする
+			HttpSession session = req.getSession(true);
+			//セッションに"user"という変数名で値はteacher変数の中身
+			session.setAttribute("user", teacher);
 
-		teacher.setId(id);
-		teacher.setPassword(password);
-		teacher.setName(name);
-
-		school.setCd(school_cd);
-		school.setName("大宮校");
-
-		teacher.setSchool(school);//School型
-
-		// 認証済みフラグを立てる
-		teacher.setAuthenticated(true);
-
-		//Sessionを有効にする
-		HttpSession session = req.getSession(true);
-		//セッションに"user"という変数名で値はTeacher変数の中身
-		session.setAttribute("user", teacher);
+		}
 
 		//DBへデータ保存 5
 		//なし

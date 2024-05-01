@@ -111,7 +111,7 @@ public class TeacherDao extends Dao{
 				teacher.setId(id);
 				teacher.setPassword(password);
 				teacher.setName(rSet.getString("name"));
-				teacher.setSchool(schoolDao.get("school_cd"));
+				teacher.setSchool(schoolDao.get(rSet.getString("school_cd")));
 			} else {
 				//対応する教員がいない場合はnullを返す
 				teacher = null;
