@@ -45,6 +45,8 @@ public class Util{
 				// リザルトセットが存在する場合
 				// 入学年度をセット
 				ent_year.add(rSet.getString("ent_year"));
+			} else {
+				ent_year = null;
 			}
 
 		} catch (Exception e){
