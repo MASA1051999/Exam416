@@ -54,7 +54,7 @@
 	<c:choose>
 		<c:when test="${test_list.size()>0}">
 			<%-- 科目名を送ってもらう --%>
-			<h2>科目：${subject_name.name}(${tests.no}回)</h2>>
+			<h2>科目：${subject_name.name}(${test_list.no}回)</h2>>
 
 			<table class="table table-hover">
 				<tr>
