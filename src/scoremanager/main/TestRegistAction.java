@@ -23,37 +23,39 @@ public class TestRegistAction extends Action {
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
 		List<Test> test = null;//テストリスト
-		int entYear = 0;// 入学年度
 		TestDao tDao = new TestDao();// クラス番号Daoを初期化
 		SubjectDao sDao = new SubjectDao();
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
-		String subjectName = "";
+		String subjectName = "";//科目名
+		int testNum = 0;
 
 
 		//リクエストパラメータ―の取得 2
 		String entYearStr = req.getParameter("f1");//入学年度
 		String classNum = req.getParameter("f2");//クラス番号
 		String subjectCd = req.getParameter("f3");//科目コード
-		int Num = Integer.parseInt(req.getParameter("f4"));//回数
+		String Num = req.getParameter("f4");//回数
+
+		if(Num != null){
+			testNum = Integer.parseInt(Num);
+		}
 
 
 		//DBからデータ取得 3
 		// ログインユーザーの学校コードをもとにテストの一覧を取得
-		List<Test> list = tDao.filter(entYearStr, classNum, sDao.get(subjectCd, teacher.getSchool()),Num, teacher.getSchool());
-		subjectName = sDao.get(subjectCd, teacher.getSchool()).getName();
+//		List<Test> list = tDao.filter(entYearStr, classNum, sDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
+//		subjectName = sDao.get(subjectCd, teacher.getSchool()).getName();
 
 		//ビジネスロジック 4
-		if (entYearStr != null) {
-			// 数値に変換
-			entYear = Integer.parseInt(entYearStr);
-		}
+		//なし
+
 		//DBへデータ保存 5
 		//なし
 
 		//レスポンス値をセット 6
 		// リクエストにテストリストをセット
-		req.setAttribute("test_list", list);
-		req.setAttribute("subject_name", subjectName);
+//		req.setAttribute("test_list", list);
+//		req.setAttribute("subject_name", subjectName);
 		//JSPへフォワード 7
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 	}
