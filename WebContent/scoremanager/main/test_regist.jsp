@@ -53,7 +53,7 @@
 
 	<c:choose>
 		<c:when test="${test_list.size()>0}">
-			<h2>科目：${subject_name}(${num}回)</h2>
+			<h2>科目：${subjectName}(${num}回)</h2>
 			<form action="TestRegistExecute.action">
 				<table class="table table-hover">
 					<tr>

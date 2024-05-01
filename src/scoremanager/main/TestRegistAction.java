@@ -23,11 +23,10 @@ public class TestRegistAction extends Action {
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
 		TestDao tDao = new TestDao();// クラス番号Daoを初期化
-		String subject_name ="";//科目名を初期化
 		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
 		Util util = new Util();//utilの初期化
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
-		String subjectName = "";//科目名
+		String subjectName = "";//科目名を初期化
 		int testNum = 0;
 
 
@@ -58,7 +57,7 @@ public class TestRegistAction extends Action {
 
 			//リクエストにテストリスト、科目名、試験回数をセット
 			req.setAttribute("test_list", list);
-			req.setAttribute("subject_name", subject_name);
+			req.setAttribute("subjectName", subjectName);
 			req.setAttribute("num", Num);
 
 		}//1つでも値が入力されていたとき…入力が不足しているとき

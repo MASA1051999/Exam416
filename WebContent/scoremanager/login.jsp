@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,14 +22,23 @@
 	required:input要素を入力必須にする属性
  -->
 
-	<!-- ＩＤ -->
+	<h2>ログイン</h2>
+
+	<%-- エラーメッセージがあるとき、リストを表示 --%>
+	<c:if test="${!empty errors}">
+		<ul>
+			<li>${errors.error}</li>
+		</ul>
+	</c:if>
+
+	<!-- ＩＤ 未入力を許可しない-->
 	<label>ＩＤ</label>
 	<input type="text" name="id" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい"
 	 autocomplete="off" style="ime-mode: disabled" value="K01" required/>
 
-	<!-- パスワード -->
+	<!-- パスワード 未入力を許可しない-->
 	<label>パスワード</label>
-	<input type="password" name="password" value="111">
+	<input type="password" name="password" value="111" required>
 
 	<!-- ログイン用ボタン -->
 	<input type="submit" name="login" value="ログイン"/>
