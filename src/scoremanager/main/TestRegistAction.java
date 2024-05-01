@@ -43,8 +43,8 @@ public class TestRegistAction extends Action {
 
 		//DBからデータ取得 3
 		// ログインユーザーの学校コードをもとにテストの一覧を取得
-//		List<Test> list = tDao.filter(entYearStr, classNum, sDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
-//		subjectName = sDao.get(subjectCd, teacher.getSchool()).getName();
+		List<Test> list = tDao.filter(entYearStr, classNum, sDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
+		subjectName = sDao.get(subjectCd, teacher.getSchool()).getName();
 
 		//ビジネスロジック 4
 		//なし
@@ -54,8 +54,8 @@ public class TestRegistAction extends Action {
 
 		//レスポンス値をセット 6
 		// リクエストにテストリストをセット
-//		req.setAttribute("test_list", list);
-//		req.setAttribute("subject_name", subjectName);
+		req.setAttribute("test_list", list);
+		req.setAttribute("subject_name", subjectName);
 		//JSPへフォワード 7
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 	}
