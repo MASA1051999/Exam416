@@ -26,6 +26,7 @@ public class Util{
 
 
 
+	@SuppressWarnings("null")
 	public void setClassNumSet(HttpServletRequest req) throws Exception {
 		Dao dao = new Dao();//Daoの初期化
 		List<String> ent_year = null;//入学年度を保存するリスト
