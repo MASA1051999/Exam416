@@ -12,14 +12,6 @@
 	<h2>成績管理</h2>
 	<form action = "TestRegist.action" method="post">
 
-		<label>入学年度</label>
-		<select name="f1">
-			<c:forEach var="year" items="${ent_year}">
-				<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-				<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
-			</c:forEach>
-		</select>
-
 		<label>クラス</label>
 		<select name="f2">
 			<c:forEach var="num" items="${classNum}">
@@ -28,9 +20,18 @@
 			</c:forEach>
 		</select>
 
+		<label>入学年度</label>
+		<select name="f1">
+			<c:forEach var="year" items="${ent_year}">
+				<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
+				<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
+			</c:forEach>
+		</select>
+
+
 		<label>科目</label>
 		<select name="f3">
-			<c:forEach var="subject.cd" items="${subject.name}">
+			<c:forEach var="subject" items="${subjects}">
 				<%-- 現在のsubject.cdと選択されていたf3が一致していた場合selectedを追記 --%>
 				<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.cd}</option>
 			</c:forEach>
@@ -38,7 +39,7 @@
 
 		<label>回数</label>
 		<select name="f4">
-			<c:forEach var="no" items="${no}">
+			<c:forEach var="no" items="${numList}">
 				<%-- 現在のnoと選択されていたf4が一致していた場合selectedを追記 --%>
 				<option value="${no}" <c:if test="${no==f2}">selected</c:if>>${no}</option>
 			</c:forEach>

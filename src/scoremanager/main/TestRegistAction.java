@@ -47,7 +47,10 @@ public class TestRegistAction extends Action {
 
 		//DBからデータ取得 3
 		//List<Subject> subjects = sbjectDao.filter(teacher.getSchool());
-		//util.setClassNumSet(req);
+		util.setClassNumSet(req);
+		util.setEntyearSet(req);
+		util.setSubjects(req);
+		util.setNumSet(req);
 
 
 		// ログインユーザーの学校コードをもとにテストの一覧を取得
