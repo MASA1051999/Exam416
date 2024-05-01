@@ -28,7 +28,7 @@
 			</c:forEach>
 		</select>
 
-		<label>科目</label>>
+		<label>科目</label>
 		<select name="f3">
 			<c:forEach var="subject.cd" items="${subject.name}">
 				<%-- 現在のsubject.cdと選択されていたf3が一致していた場合selectedを追記 --%>
@@ -36,7 +36,7 @@
 			</c:forEach>
 		</select>
 
-		<label>回数</label>>
+		<label>回数</label>
 		<select name="f4">
 			<c:forEach var="no" items="${no}">
 				<%-- 現在のnoと選択されていたf4が一致していた場合selectedを追記 --%>
@@ -65,7 +65,7 @@
 					<th>点数</th>
 				</tr>
 				<%-- 取得したテスト結果の表示 --%>
-				<form action="TestRegistExecute.action" method="post">
+
 					<c:forEach var="test" items="${test_list}">
 						<tr>
 							<td>${test.entYear}</td>
