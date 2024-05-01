@@ -52,9 +52,9 @@
 	<%-- 入学年度とクラスと科目と回数を選択してください --%>
 
 	<c:choose>
-		<c:when test="${tests.size()>0}">
+		<c:when test="${test_list.size()>0}">
 			<%-- 科目名を送ってもらう --%>
-			<h2>科目：${subject.name}(${tests.no}回)</h2>>
+			<h2>科目：${subject.name}(${test_list.no}回)</h2>>
 
 			<table class="table table-hover">
 				<tr>
@@ -66,7 +66,7 @@
 				</tr>
 				<%-- 取得したテスト結果の表示 --%>
 				<form action="TestRegistExecute.action" method="post">
-					<c:forEach var="test" items="${tests}">
+					<c:forEach var="test" items="${test_list}">
 						<tr>
 							<td>${test.entYear}</td>
 							<td>${test.classNum}</td>

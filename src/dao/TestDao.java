@@ -105,7 +105,7 @@ public class TestDao extends Dao {
 	}
 
 
-	public List<Test> filter(int entYear, String classNum, Subject subject, int num, School school) throws Exception {
+	public List<Test> filter(String entYear, String classNum, Subject subject, int num, School school) throws Exception {
 		List<Test> list = new ArrayList<>();
 
 		//データベースへのコネクションを確立
@@ -126,7 +126,7 @@ public class TestDao extends Dao {
 			statement = connection.prepareStatement(baseSql + condition  + order );
 
 			//プレースホルダー（？の部分）に値を設定
-			statement.setInt(1, entYear);
+			statement.setString(1, entYear);
 			statement.setString(2, classNum);
 			statement.setString(3, subject.getCd());
 			statement.setInt(4, num);
