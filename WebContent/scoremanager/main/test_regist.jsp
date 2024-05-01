@@ -65,25 +65,25 @@
 					<th>点数</th>
 				</tr>
 				<%-- 取得したテスト結果の表示 --%>
-				<c:forEach var="test" items="${tests}">
-					<tr>
-						<td>${test.entYear}</td>
-						<td>${test.classNum}</td>
-						<td>${test.student.no}</td>
-						<td>${test.student.name}</td>
-						<td>
-							<input type="text" name="point_${test.student.no}" value=" ${test.point}"/>
-							<%-- 0～100の範囲で入力してください、と表示する --%>
-							<div>${errors.get("test_error")}</div>
-						</td>
-					</tr>
-				</c:forEach>
+				<form action="TestRegistExecute.action" method="post">
+					<c:forEach var="test" items="${tests}">
+						<tr>
+							<td>${test.entYear}</td>
+							<td>${test.classNum}</td>
+							<td>${test.student.no}</td>
+							<td>${test.student.name}</td>
+							<td>
+								<input type="text" name="point_${test.student.no}" value=" ${test.point}"/>
+								<%-- 0～100の範囲で入力してください、と表示する --%>
+								<div>${errors.get("test_error")}</div>
+							</td>
+						</tr>
+					</c:forEach>
+					<input type="button">登録して終了
+				</form>
 			</table>
 		</c:when>
 	</c:choose>
-
-
-	<input type="button"><a href="TestRegistExecute.action">登録して終了</a>
 
 </body>
 </html>
