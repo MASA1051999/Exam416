@@ -43,7 +43,7 @@ public class TestListAction extends Action{
 		//リクエストパラメータ―の取得 2
 		entYearStr = req.getParameter("f1");
 		classNum = req.getParameter("f2");
-		Subject = req.getParameter("f3");
+		subject = req.getParameter("f3");
 
 		if (isAttendStr != null) {
 			// 在学フラグを立てる
@@ -112,10 +112,3 @@ public class TestListAction extends Action{
 
 }
 
-
-
-
-
-
-
-}
