@@ -33,7 +33,7 @@
 		<select name="f3">
 			<c:forEach var="subject" items="${subjects}">
 				<%-- 現在のsubject.cdと選択されていたf3が一致していた場合selectedを追記 --%>
-				<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
+				<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.cd}</option>
 			</c:forEach>
 		</select>
 
@@ -41,7 +41,7 @@
 		<select name="f4">
 			<c:forEach var="no" items="${numList}">
 				<%-- 現在のnoと選択されていたf4が一致していた場合selectedを追記 --%>
-				<option value="${no}" <c:if test="${no==f2}">selected</c:if>>${no}</option>
+				<option value="${no}" <c:if test="${no==f4}">selected</c:if>>${no}</option>
 			</c:forEach>
 		</select>
 
@@ -66,7 +66,7 @@
 					<%-- 取得したテスト結果の表示 --%>
 						<c:forEach var="test" items="${test_list}">
 							<tr>
-								<td>${test.student.entYear}</td>
+								<td>${test}</td>
 								<td>${test.classNum}</td>
 								<td>${test.student.no}</td>
 								<td>${test.student.name}</td>
