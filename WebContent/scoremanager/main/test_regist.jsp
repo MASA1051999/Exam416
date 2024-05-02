@@ -41,7 +41,7 @@
 		<select name="f4">
 			<c:forEach var="no" items="${numList}">
 				<%-- 現在のnoと選択されていたf4が一致していた場合selectedを追記 --%>
-				<option value="${no}" <c:if test="${no==f2}">selected</c:if>>${no}</option>
+				<option value="${no}" <c:if test="${no==f4}">selected</c:if>>${no}</option>
 			</c:forEach>
 		</select>
 
@@ -78,7 +78,7 @@
 							</tr>
 						</c:forEach>
 				</table>
-			<input type="button">登録して終了</form>
+			<input type="submit" value="登録して終了"></form>
 		</c:when>
 	</c:choose>
 
