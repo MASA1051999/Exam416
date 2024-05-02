@@ -66,7 +66,7 @@
 					<%-- 取得したテスト結果の表示 --%>
 						<c:forEach var="test" items="${test_list}">
 							<tr>
-								<td>${test}</td>
+								<td>${test.student.entYear}</td>
 								<td>${test.classNum}</td>
 								<td>${test.student.no}</td>
 								<td>${test.student.name}</td>
@@ -78,7 +78,7 @@
 							</tr>
 						</c:forEach>
 				</table>
-			<input type="button">登録して終了</form>
+			<input type="submit" value="登録して終了"></form>
 		</c:when>
 	</c:choose>
 

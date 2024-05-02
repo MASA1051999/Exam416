@@ -105,7 +105,7 @@ public class TestDao extends Dao {
 	}
 
 
-	public List<Test> filter(String entYear, String classNum, Subject subject, int num, School school) throws Exception {
+	public List<Test> filter(int entYear, String classNum, Subject subject, int num, School school) throws Exception {
 		List<Test> list = new ArrayList<>();
 
 		//データベースへのコネクションを確立
@@ -116,17 +116,17 @@ public class TestDao extends Dao {
 
 		ResultSet rSet = null;
 
-		String condition = " and ent_year=? and student.class_num=? and subject_cd=? and student.no=? and student.school_cd=?";
+		String condition = " where ent_year=? and student.class_num=? and subject_cd=? and test.no=? and student.school_cd=?";
 
 		String order = " order by student_no asc";
 
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + " join student on test.school_cd = student.school_cd"+ condition  + order );
+			statement = connection.prepareStatement(baseSql + " join student on test.student_no = student.no"+ condition  + order );
 
 			//プレースホルダー（？の部分）に値を設定
-			statement.setString(1, entYear);
+			statement.setInt(1, entYear);
 			statement.setString(2, classNum);
 			statement.setString(3, subject.getCd());
 			statement.setInt(4, num);

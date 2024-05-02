@@ -53,7 +53,7 @@ public class TestRegistAction extends Action {
 			//科目名を取得
 			subjectName = subjectDao.get(subjectCd, teacher.getSchool()).getName();
 			// リクエストパラメータの情報をもとにテストの一覧を取得
-			List<Test> list = tDao.filter(entYearStr, classNum, subjectDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
+			List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
 
 			//リクエストにテストリスト、科目名、試験回数をセット
 			req.setAttribute("test_list", list);
@@ -78,6 +78,7 @@ public class TestRegistAction extends Action {
 		req.setAttribute("f2", classNum);
 		req.setAttribute("f3", subjectCd);
 		req.setAttribute("f4", Num);
+
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
