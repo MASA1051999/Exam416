@@ -123,7 +123,7 @@ public class TestDao extends Dao {
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + "join student on test.school_cd = student.school_cd"+ condition  + order );
+			statement = connection.prepareStatement(baseSql + " join student on test.school_cd = student.school_cd"+ condition  + order );
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, entYear);
