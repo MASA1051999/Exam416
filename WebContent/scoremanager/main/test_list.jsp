@@ -10,26 +10,26 @@
 </head>
 <body>
 	<h2>成績参照</h2>
-	<form action = "TestRegist.action" method="post">
+	<form action = "TestList.action" method="post">
 		<div>科目情報</div>
-			<label>入学年度</label>>
+			<label>入学年度</label>
 			<select name="f1">
-				<c:forEach var="ent_year" items="${year}">
-					<option value="${year}"><%-- 入力されてた時の設定がまだ --%>
+				<c:forEach var="year" items="${ent_year}">
+					<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
 				</c:forEach>
 			</select>
 
-			<label>クラス</label>>
+			<label>クラス</label>
 			<select name="f2">
-				<c:forEach var="class" items="${num}">
+				<c:forEach var="num" items="${classNum}">
 					<option value="${num}">
 				</c:forEach>
 			</select>
 
-			<label>科目</label>>
+			<label>科目</label>
 			<select name="f3">
-				<c:forEach var="subject" items="${subject.name}">
-					<option value="${subject.cd}">
+				<c:forEach var="subject" items="${subjects}">
+					<option value="${subject.name}">
 				</c:forEach>
 			</select>
 
