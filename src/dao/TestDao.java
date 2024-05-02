@@ -116,7 +116,7 @@ public class TestDao extends Dao {
 
 		ResultSet rSet = null;
 
-		String condition = " and ent_year=? and class_num=? and subject_cd=? and no=? and school_cd=?";
+		String condition = " and ent_year=? and student.class_num=? and subject_cd=? and student.no=? and student.school_cd=?";
 
 		String order = " order by student_no asc";
 
