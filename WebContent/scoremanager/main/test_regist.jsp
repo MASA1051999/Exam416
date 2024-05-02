@@ -14,6 +14,7 @@
 
 		<label>クラス</label>
 		<select name="f2">
+		<option value="0">------</option>
 			<c:forEach var="num" items="${classNum}">
 				<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
 				<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
@@ -22,6 +23,7 @@
 
 		<label>入学年度</label>
 		<select name="f1">
+			<option value="0">------</option>
 			<c:forEach var="year" items="${ent_year}">
 				<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
 				<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
@@ -31,6 +33,7 @@
 
 		<label>科目</label>
 		<select name="f3">
+			<option value="0">------</option>
 			<c:forEach var="subject" items="${subjects}">
 				<%-- 現在のsubject.cdと選択されていたf3が一致していた場合selectedを追記 --%>
 				<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.cd}</option>
@@ -39,6 +42,7 @@
 
 		<label>回数</label>
 		<select name="f4">
+			<option value="0">------</option>
 			<c:forEach var="no" items="${numList}">
 				<%-- 現在のnoと選択されていたf4が一致していた場合selectedを追記 --%>
 				<option value="${no}" <c:if test="${no==f4}">selected</c:if>>${no}</option>
