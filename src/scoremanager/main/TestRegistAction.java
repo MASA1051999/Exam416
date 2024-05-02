@@ -73,6 +73,11 @@ public class TestRegistAction extends Action {
 		//なし
 
 		//レスポンス値をセット 6
+		//リクエストに値をセット
+		req.setAttribute("f1", entYearStr);
+		req.setAttribute("f2", classNum);
+		req.setAttribute("f3", subjectCd);
+		req.setAttribute("f4", Num);
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
