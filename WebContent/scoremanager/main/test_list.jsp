@@ -14,6 +14,7 @@
 		<div>科目情報</div>
 			<label>入学年度</label>
 			<select name="f1">
+				<option value="0">------</option>
 				<c:forEach var="year" items="${ent_year}">
 					<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
 				</c:forEach>
@@ -21,6 +22,7 @@
 
 			<label>クラス</label>
 			<select name="f2">
+				<option value="0">------</option>
 				<c:forEach var="num" items="${classNum}">
 					<option value="${num}">
 				</c:forEach>
@@ -28,6 +30,7 @@
 
 			<label>科目</label>
 			<select name="f3">
+				<option value="0">------</option>
 				<c:forEach var="subject" items="${subjects}">
 					<option value="${subject.name}">
 				</c:forEach>
@@ -36,10 +39,25 @@
 
 		<button>検索</button>
 	</form>
+	
+	
+	<table class="table table-hover">
+			<tr>
+				<th>科目コード</th>
+				<th>科目名</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<c:forEach var="subject" items="${subjects}">
+				<tr>
+					<td>${subject.cd}</td>
+					<td>${subject.name}</td>
+					<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
+					<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a>
+				</tr>
+			</c:forEach>
+		</table>
 
-	<form action="TestListStudentExecute.action" method="post">
-
-	</form>
 
 
 

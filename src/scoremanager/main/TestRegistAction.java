@@ -46,8 +46,11 @@ public class TestRegistAction extends Action {
 		util.setNumSet(req);
 
 
-		//全てに値が入力されていた場合
+		//nullかどうかチェック
 		if(entYearStr != null && classNum != null && subjectCd != null && Num != null){
+
+			//全てに値が入力されていた場合
+			if(!entYearStr.equals("0") && !classNum.equals("0") && !subjectCd.equals("0") && !Num.equals("0"))
 			//テスト回数を整数に直す
 			testNum = Integer.parseInt(Num);
 			//科目名を取得
@@ -60,10 +63,17 @@ public class TestRegistAction extends Action {
 			req.setAttribute("subjectName", subjectName);
 			req.setAttribute("num", Num);
 
-		}//1つでも値が入力されていたとき…入力が不足しているとき
-		else if(entYearStr != null && classNum != null && subjectCd != null && Num != null){
-			errors.put("test", "入学年度とクラスと科目と回数を選択してください");
-		}
+			//リクエストに値をセット
+			req.setAttribute("f1", entYearStr);
+			req.setAttribute("f2", classNum);
+			req.setAttribute("f3", subjectCd);
+			req.setAttribute("f4", Num);
+
+			}//1つでも値が入力されていたとき…入力が不足しているとき
+			else {
+				errors.put("test", "入学年度とクラスと科目と回数を選択してください");
+				System.out.print("aaa");
+			}
 
 
 		//ビジネスロジック 4
@@ -73,11 +83,6 @@ public class TestRegistAction extends Action {
 		//なし
 
 		//レスポンス値をセット 6
-		//リクエストに値をセット
-		req.setAttribute("f1", entYearStr);
-		req.setAttribute("f2", classNum);
-		req.setAttribute("f3", subjectCd);
-		req.setAttribute("f4", Num);
 
 
 		//JSPへフォワード 7
