@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.Teacher;
 import bean.Test;
-import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -23,13 +22,11 @@ public class TestRegistAction extends Action {
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
-		List<Test> test = null;//テストリスト
 		TestDao tDao = new TestDao();// クラス番号Daoを初期化
-		StudentDao studentDao = new StudentDao();
-		SubjectDao sbjectDao = new SubjectDao();
-		Util util = new Util();
+		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
+		Util util = new Util();//utilの初期化
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
-		String subjectName = "";//科目名
+		String subjectName = "";//科目名を初期化
 		int testNum = 0;
 
 
@@ -40,19 +37,34 @@ public class TestRegistAction extends Action {
 		String Num = req.getParameter("f4");//回数
 
 
-		if(Num != null){
+		//DBからデータ取得 3
+		//検索条件の指定によって、3、6の処理を行うか分岐する
+		//クラス番号、入学年度、科目、試験回数を取得し、リクエスト属性に保存
+		util.setClassNumSet(req);
+		util.setEntyearSet(req);
+		util.setSubjects(req);
+		util.setNumSet(req);
+
+
+		//全てに値が入力されていた場合
+		if(entYearStr != null && classNum != null && subjectCd != null && Num != null){
+			//テスト回数を整数に直す
 			testNum = Integer.parseInt(Num);
+			//科目名を取得
+			subjectName = subjectDao.get(subjectCd, teacher.getSchool()).getName();
+			// リクエストパラメータの情報をもとにテストの一覧を取得
+			List<Test> list = tDao.filter(entYearStr, classNum, subjectDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
+
+			//リクエストにテストリスト、科目名、試験回数をセット
+			req.setAttribute("test_list", list);
+			req.setAttribute("subjectName", subjectName);
+			req.setAttribute("num", Num);
+
+		}//1つでも値が入力されていたとき…入力が不足しているとき
+		else if(entYearStr != null && classNum != null && subjectCd != null && Num != null){
+			errors.put("test", "入学年度とクラスと科目と回数を選択してください");
 		}
 
-
-		//DBからデータ取得 3
-		//List<Subject> subjects = sbjectDao.filter(teacher.getSchool());
-		//util.setClassNumSet(req);
-
-
-		// ログインユーザーの学校コードをもとにテストの一覧を取得
-//		List<Test> list = tDao.filter(entYearStr, classNum, sDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
-//		subjectName = sDao.get(subjectCd, teacher.getSchool()).getName();
 
 		//ビジネスロジック 4
 		//なし
@@ -61,9 +73,7 @@ public class TestRegistAction extends Action {
 		//なし
 
 		//レスポンス値をセット 6
-		// リクエストにテストリストをセット
-		//req.setAttribute("test_list", list);
-		req.setAttribute("subject_name", subjectName);
+
 		//JSPへフォワード 7
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 	}
