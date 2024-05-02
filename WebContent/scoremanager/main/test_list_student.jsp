@@ -55,7 +55,36 @@
 		<button>検索</button>
 	</form>
 
-	<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
+
+	<%-- ここから検索結果表示 --%>
+	<c:choose>
+		<%-- 検索結果が0件のとき --%>
+		<c:when test="${studentTests.sise()=0}">
+			<p>学生情報が存在しませんでした</p>
+		</c:when>
+
+		<%-- 検索結果が1件以上のとき --%>
+		<c:when test="${studentTests.size()>0}">
+			<div>氏名：${studentName}(${studentCd })</div>
+
+			<table class="table table-hover">
+					<tr>
+						<th>科目名</th>
+						<th>科目コード</th>
+						<th>回数</th>
+						<th>点数</th>
+					</tr>
+					<c:forEach var="test" items="${studentTests}">
+						<tr>
+							<td>${test.subjectName}</td>
+							<td>${test.subjectCd}</td>
+							<td>${test.num}</td>
+							<td>${test.point}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:when>
+		</c:choose>
 
 </body>
 </html>

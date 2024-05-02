@@ -55,7 +55,42 @@
 		<button>検索</button>
 	</form>
 
-	<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
+
+	<%-- ここから検索結果表示 --%>
+	<c:choose>
+		<%-- 検索結果が0件のとき --%>
+		<c:when test="${subjectTests.sise()=0}">
+			<p>学生情報が存在しませんでした</p>
+		</c:when>
+
+		<%-- 検索結果が1件以上のとき、科目別成績一覧を表示 --%>
+		<c:when test="${subjectTests.size()>0}">
+			<div>科目：${subjectName}</div>
+
+			<table class="table table-hover">
+					<tr>
+						<th>入学年度</th>
+						<th>クラス</th>
+						<th>学生番号</th>
+						<th>氏名</th>
+						<th>１回</th>
+						<th>２回</th>
+					</tr>
+					<%-- 初期値を空にしてない --%>
+					<c:forEach var="test" items="${subjectTests}">
+						<tr>
+							<td>${test.entYear}</td>
+							<td>${test.classNum}</td>
+							<td>${test.studentNo}</td>
+							<td>${test.studentName}</td>
+							<td>${test.points.no1}</td>
+							<td>${test.points.no2}</td>
+
+						</tr>
+					</c:forEach>
+				</table>
+			</c:when>
+		</c:choose>
 
 </body>
 </html>
