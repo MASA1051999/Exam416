@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
+import bean.Subject;
 
-public class TestListAction {
+public class TestListAction extends Action{
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -28,6 +30,7 @@ public class TestListAction {
 		String entYearStr="";// 入力された入学年度
 		String classNum = "";//入力されたクラス番号
 		String isAttendStr="";//入力された在学フラグ
+		String subject="";		//入力された科目
 		int entYear = 0;// 入学年度
 		boolean isAttend = false;// 在学フラグ
 		List<Student> students = null;// 学生リスト
@@ -40,7 +43,7 @@ public class TestListAction {
 		//リクエストパラメータ―の取得 2
 		entYearStr = req.getParameter("f1");
 		classNum = req.getParameter("f2");
-		isAttendStr = req.getParameter("f3");
+		subject = req.getParameter("f3");
 
 		if (isAttendStr != null) {
 			// 在学フラグを立てる
@@ -54,8 +57,12 @@ public class TestListAction {
 			entYear = Integer.parseInt(entYearStr);
 		}
 
-		if (entYear != 0 && !classNum.equals("0")) {
-			// 入学年度とクラス番号を指定
+		//DBからデータを取得
+		// ログインユーザの学校コードをもとに科目データを取得
+		List<String> subjectlist = cNumDao.filter(Subject.);
+
+		if (entYear != 0 && classNum.equals("0")) {
+			// 入学年度とクラス番号と科目を指定
 			students = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
 		} else if (entYear != 0 && classNum.equals("0")) {
 			// 入学年度のみ指定
@@ -100,15 +107,8 @@ public class TestListAction {
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
 		//JSPへフォワード 7
-		req.getRequestDispatcher("student_list.jsp").forward(req, res);
+		req.getRequestDispatcher("test_list.jsp").forward(req, res);
 	}
 
 }
 
-
-
-
-
-
-
-}
