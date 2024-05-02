@@ -48,21 +48,20 @@ public class TestListSubjectDao {
 	 */
 	public List<TestListSubject> filter(int entYear, String classNum, Subject subject, School school) throws Exception {
 		List<TestListSubject> list = new ArrayList<>();
-		SubjectDao sDao = new SubjectDao();
-
 		//データベースへのコネクションを確立
 		Connection connection = getConnection();
 
 		//プリペアードステートメント
 		PreparedStatement statement = null;
 
+		//リザルトセット
 		ResultSet rSet = null;
 
-		//studentとtestをschool_cdでjoinする。
+		//studentとtestをstudent_noでjoinする。
 		String baseSql = "select * from student join test on student.no =test.student_no";
 
 		//条件指定
-		String condition = " where school_cd=? and class_num=? and subject_no=? and ent_year=? and";
+		String condition = " where school_cd=? and class_num=? and subject_no=? and ent_year=?";
 
 		//学生コードの昇順
 		String order = " order by school_cd asc";

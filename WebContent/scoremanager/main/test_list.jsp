@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h2>成績参照</h2>
+	<%-- ここから検索条件入力 --%>
 	<form action = "TestListSubjectExecute.action" method="post">
 		<div>科目情報</div>
 			<label>入学年度</label>
@@ -54,28 +55,43 @@
 		<button>検索</button>
 	</form>
 
-	<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
 
-	<div>科目:${subjectName}</div>
-	<table class="table table-hover">
-			<tr>
-				<th>入学年度</th>
-				<th>クラス</th>
-				<th>学生番号</th>
-				<th>氏名</th>
-				<th>１回</th>
-				<th>２回</th>
-			</tr>
-			<c:forEach var="subject" items="${subjectTests}">
-				<tr>
-					<td>${subject.cd}</td>
-					<td>${subject.name}</td>
-					<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
-					<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a>
-				</tr>
-			</c:forEach>
-		</table>
+	<%-- ここから検索結果表示 --%>
+	<c:choose>
+		<%-- 検索結果がnullのとき --%>
+		<c:when test="${subjectTests==null}">
+			<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
+		</c:when>
 
+		<%-- 検索結果が0件のとき --%>
+		<c:when test="${subjectTests.sise()=0}">
+			<p>学生情報が存在しませんでした</p>
+		</c:when>
+
+		<%-- 検索結果が1件以上のとき --%>
+		<c:when test="${subjectTests.size()>0}">
+			<div>科目:${subjectName}</div>
+
+			<table class="table table-hover">
+					<tr>
+						<th>入学年度</th>
+						<th>クラス</th>
+						<th>学生番号</th>
+						<th>氏名</th>
+						<th>１回</th>
+						<th>２回</th>
+					</tr>
+					<c:forEach var="subject" items="${subjectTests}">
+						<tr>
+							<td>${subject.cd}</td>
+							<td>${subject.name}</td>
+							<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
+							<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:when>
+		</c:choose>
 
 
 
