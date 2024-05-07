@@ -25,7 +25,7 @@
 			<select name="f2">
 				<option value="0">------</option>
 				<c:forEach var="num" items="${classNum}">
-					<option value="${num}">
+					<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
 				</c:forEach>
 			</select>
 
@@ -33,7 +33,7 @@
 			<select name="f3">
 				<option value="0">------</option>
 				<c:forEach var="subject" items="${subjects}">
-					<option value="${subject.name}">
+					<option value="${subject.name}" <c:if test="${subject==f3}">selected</c:if>>${subject.name}</option>
 				</c:forEach>
 			</select>
 
@@ -42,6 +42,7 @@
 	</form>
 
 	<form action="TestListStudentExecute.action">
+
 		<p>学生情報</p>
 			<label>学生番号</label>
 			<input type="text" name="f4" maxlength="10" placeholder="学生番号を入力してください"
