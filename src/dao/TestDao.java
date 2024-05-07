@@ -22,7 +22,7 @@ public class TestDao extends Dao {
 
 		Connection connection = getConnection();
 
-		String condition = " where student_no=? and school_cd=? and subject_cd=? and no=?";
+		String condition = " where student_no=? and subject_cd=? and school_cd=? and no=?";
 
 
 		//プリペアードステートメント
