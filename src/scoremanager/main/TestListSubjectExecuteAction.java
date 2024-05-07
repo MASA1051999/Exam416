@@ -39,6 +39,10 @@ public class TestListSubjectExecuteAction extends Action{
 		classnum = req.getParameter("f2");
 		subject = sDao.get(req.getParameter("f3"), teacher.getSchool());
 
+		util.setClassNumSet(req);
+		util.setEntyearSet(req);
+		util.setSubjects(req);
+
 		//全てに値が入力されていた場合
 		//DBからデータ取得 3
 		if(!entyear.equals("0") && !classnum.equals("0") && subject != null){
@@ -54,11 +58,6 @@ public class TestListSubjectExecuteAction extends Action{
 		}else{
 			error.put("error", "入学年度とクラスと科目を選択してください");
 			req.setAttribute("error", error);
-
-			// ログインユーザーの学校コードをもとにクラス番号の一覧を取得
-			util.setClassNumSet(req);
-			util.setEntyearSet(req);
-			util.setSubjects(req);
 
 			req.getRequestDispatcher("test_list.jsp").forward(req, res);
 		}
