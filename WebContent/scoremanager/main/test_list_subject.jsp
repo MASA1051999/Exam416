@@ -59,7 +59,7 @@
 	<%-- ここから検索結果表示 --%>
 	<c:choose>
 		<%-- 検索結果が0件のとき --%>
-		<c:when test="${empty subjectTests}">
+		<c:when test="${subjectTests.sise()=0}">
 			<p>学生情報が存在しませんでした</p>
 		</c:when>
 
