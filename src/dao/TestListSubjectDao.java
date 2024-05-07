@@ -29,7 +29,7 @@ public class TestListSubjectDao {
 				tls.setStudentNo(rSet.getString("no"));
 				tls.setStudentName(rSet.getString("name"));
 				tls.setClassNum(rSet.getString("class_num"));
-				map.put(rSet.getInt("no"),rSet.getInt("point"));
+				map.put(rSet.getInt("num"),rSet.getInt("point"));
 				tls.setPoints(map);
 				list.add(tls);
 			}
@@ -59,13 +59,13 @@ public class TestListSubjectDao {
 		ResultSet rSet = null;
 
 		//studentとtestをstudent_noでjoinする。
-		String baseSql = "select * from student join test on student.no =test.student_no";
+		String baseSql = "select ent_year,student.no,name,student.class_num,test.no as num,point from student join test on student.no =test.student_no";
 
 		//条件指定
 		String condition = " where test.school_cd=? and test.class_num=? and subject_cd=? and ent_year=?";
 
 		//学生コードの昇順
-		String order = " order by school_cd asc";
+		String order = " order by num asc";
 
 		try{
 

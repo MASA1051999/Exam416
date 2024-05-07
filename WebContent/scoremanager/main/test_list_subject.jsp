@@ -83,8 +83,19 @@
 							<td>${test.classNum}</td>
 							<td>${test.studentNo}</td>
 							<td>${test.studentName}</td>
-							<td>${test.points.no1}</td>
-							<td>${test.points.no2}</td>
+							<%-- 試験回数が存在するかで分岐 --%>
+							<td>
+								<c:choose>
+									<c:when test="${!empty test.points[1]}">${test.points[1]}</c:when>
+									<c:otherwise>-</c:otherwise>
+								</c:choose>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${!empty test.points[2]}">${test.points[2]}</c:when>
+									<c:otherwise>-</c:otherwise>
+								</c:choose>
+							</td>
 
 						</tr>
 					</c:forEach>
