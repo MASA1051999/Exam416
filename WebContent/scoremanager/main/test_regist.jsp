@@ -69,7 +69,7 @@
 						<th>点数</th>
 					</tr>
 					<%-- 取得したテスト結果の表示 --%>
-						<c:forEach var="test" items="${test_list}" name="test_list">
+						<c:forEach var="test" items="${test_list}">
 							<tr>
 								<td>${test.student.entYear}</td>
 								<td>${test.classNum}</td>
