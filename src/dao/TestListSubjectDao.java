@@ -48,8 +48,9 @@ public class TestListSubjectDao {
 	 */
 	public List<TestListSubject> filter(int entYear, String classNum, Subject subject, School school) throws Exception {
 		List<TestListSubject> list = new ArrayList<>();
+		Dao dao = new Dao();
 		//データベースへのコネクションを確立
-		Connection connection = getConnection();
+		Connection connection = dao.getConnection();
 
 		//プリペアードステートメント
 		PreparedStatement statement = null;
@@ -61,7 +62,7 @@ public class TestListSubjectDao {
 		String baseSql = "select * from student join test on student.no =test.student_no";
 
 		//条件指定
-		String condition = " where school_cd=? and class_num=? and subject_no=? and ent_year=?";
+		String condition = " where test.school_cd=? and test.class_num=? and subject_cd=? and ent_year=?";
 
 		//学生コードの昇順
 		String order = " order by school_cd asc";
@@ -109,11 +110,4 @@ public class TestListSubjectDao {
 	}
 	return list;
 	}
-
-
-	private Connection getConnection() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
 }

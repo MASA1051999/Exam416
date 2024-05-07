@@ -33,7 +33,7 @@
 			<select name="f3">
 				<option value="0">------</option>
 				<c:forEach var="subject" items="${subjects}">
-					<option value="${subject.name}" <c:if test="${subject==f3}">selected</c:if>>${subject.name}</option>
+					<option value="${subject.cd}" <c:if test="${subject==f3}">selected</c:if>>${subject.name}</option>
 				</c:forEach>
 			</select>
 
@@ -59,7 +59,7 @@
 	<%-- ここから検索結果表示 --%>
 	<c:choose>
 		<%-- 検索結果が0件のとき --%>
-		<c:when test="${subjectTests.sise()=0}">
+		<c:when test="${empty subjectTests}">
 			<p>学生情報が存在しませんでした</p>
 		</c:when>
 
