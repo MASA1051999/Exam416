@@ -25,7 +25,7 @@ public class TestListSubjectDao {
 				//mapの初期化
 				Map<Integer, Integer> map = new HashMap<Integer,Integer>();
 
-				tls.setEntYear(rSet.getInt("ent_year"));;
+				tls.setEntYear(rSet.getInt("ent_year"));
 				tls.setStudentNo(rSet.getString("no"));
 				tls.setStudentName(rSet.getString("name"));
 				tls.setClassNum(rSet.getString("class_num"));
