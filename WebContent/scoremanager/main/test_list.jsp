@@ -39,6 +39,8 @@
 
 
 		<button>検索</button>
+
+		<div>${error.get("error")}</div>
 	</form>
 
 	<form action="TestListStudentExecute.action">
