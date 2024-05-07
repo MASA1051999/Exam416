@@ -35,13 +35,10 @@ public class SubjectDao extends Dao{
 			statement.setString(2, school.getCd());
 			ResultSet rSet = statement.executeQuery();
 
-			//Schoolの格納に使用
-			SchoolDao schoolDao = new SchoolDao();
-
 			if(rSet.next()){
 				subject.setCd(rSet.getString("subject_cd"));
 				subject.setName(rSet.getString("name"));
-				subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
+				subject.setSchool(school);
 			} else {
 				subject = null;
 			}

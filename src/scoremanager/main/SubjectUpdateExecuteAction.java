@@ -31,7 +31,6 @@ public class SubjectUpdateExecuteAction extends Action {
 		//変更したい科目インスタンスを取得
 		Subject old = sDao.get(code, teacher.getSchool());
 
-
 		//4～7の処理は条件によって分岐
 		//変更する科目インスタンスが存在する場合のみ、変更処理
 		if(old != null){

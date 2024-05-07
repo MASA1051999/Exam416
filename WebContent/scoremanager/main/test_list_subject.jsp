@@ -89,7 +89,7 @@
 							</td>
 							<td>
 								<c:choose>
-									<c:when test="${!empty test.points[2]}">${test.points[2]}</c:when>
+									<c:when test="${!empty test.point[2]}">${test.point[2]}</c:when>
 									<c:otherwise>-</c:otherwise>
 								</c:choose>
 							</td>
