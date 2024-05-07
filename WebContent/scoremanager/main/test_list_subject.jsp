@@ -76,7 +76,7 @@
 						<th>１回</th>
 						<th>２回</th>
 					</tr>
-					<%-- 初期値を空にしてない --%>
+					<%-- まだ初期値を空にしてない --%>
 					<c:forEach var="test" items="${subjectTests}">
 						<tr>
 							<td>${test.entYear}</td>
@@ -85,10 +85,7 @@
 							<td>${test.studentName}</td>
 							<%-- 試験回数が存在するかで分岐 --%>
 							<td>
-								<c:choose>
-									<c:when test="${!empty test.points[1]}">${test.points[1]}</c:when>
-									<c:otherwise>-</c:otherwise>
-								</c:choose>
+								${test.point.1}
 							</td>
 							<td>
 								<c:choose>

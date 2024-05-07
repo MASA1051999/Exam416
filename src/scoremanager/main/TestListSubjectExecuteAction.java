@@ -47,8 +47,9 @@ public class TestListSubjectExecuteAction extends Action{
 		//DBからデータ取得 3
 		if(!entyear.equals("0") && !classnum.equals("0") && subject != null){
 
-			// 入学年度、クラス、科目を元に科目別成績一覧を表示
+			// 入学年度、クラス、科目を元に科目別成績一覧を取得
 			test = tDao.filter(Integer.parseInt(entyear), classnum, subject,teacher.getSchool());
+
 
 			req.setAttribute("subjectTests",test);
 			req.setAttribute("subjectName", subject.getName());

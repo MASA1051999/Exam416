@@ -84,19 +84,29 @@ public class TestListSubject implements Serializable{
 		return points;
 	}
 
-
+	/**
+	 * 回数と点数のmapを保存する
+	 * @param points
+	 */
 	public void setPoints(Map<Integer, Integer> points) {
 		this.points = points;
 	}
 
+	/**
+	 * 渡された回数に対応した点数を返す
+	 */
 	public String getPoint(int key){
-		return classNum;
-
+		String point = String.valueOf(this.points.get(key));
+		return point;
 	}
 
-	public void putPoint(int key, int value){
-
+	/**
+	 * 渡された回数と点数をセットで保存
+	 * @param key
+	 * @param value
+	 */
+	public void setPoint(int key,int value){
+		this.points.put(key, value);
 	}
-
 
 }

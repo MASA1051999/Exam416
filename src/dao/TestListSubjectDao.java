@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import bean.School;
 import bean.Subject;
@@ -22,15 +20,12 @@ public class TestListSubjectDao {
 
 		try {
 			while (rSet.next()) {
-				//mapの初期化
-				Map<Integer, Integer> map = new HashMap<Integer,Integer>();
 
 				tls.setEntYear(rSet.getInt("ent_year"));
 				tls.setStudentNo(rSet.getString("no"));
 				tls.setStudentName(rSet.getString("name"));
 				tls.setClassNum(rSet.getString("class_num"));
-				map.put(rSet.getInt("num"),rSet.getInt("point"));
-				tls.setPoints(map);
+				tls.setPoint(rSet.getInt("num"),rSet.getInt("point"));
 				list.add(tls);
 			}
 		} catch (SQLException | NullPointerException e) {
@@ -59,7 +54,7 @@ public class TestListSubjectDao {
 		ResultSet rSet = null;
 
 		//studentとtestをstudent_noでjoinする。
-		String baseSql = "select ent_year,student.no,name,student.class_num,test.no as num,point from student join test on student.no =test.student_no";
+		String baseSql = "select ent_year,student.no,name,test.class_num,test.no as num,point from student join test on student.no =test.student_no";
 
 		//条件指定
 		String condition = " where test.school_cd=? and test.class_num=? and subject_cd=? and ent_year=?";
@@ -85,7 +80,7 @@ public class TestListSubjectDao {
 			rSet = statement.executeQuery();
 
 			//結果をリストに格納
-			list.addAll(postFilter(rSet));
+			list= postFilter(rSet);
 
 		} catch (Exception e) {
 			throw e;
