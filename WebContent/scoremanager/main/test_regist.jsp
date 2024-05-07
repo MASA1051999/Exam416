@@ -84,6 +84,12 @@
 						</c:forEach>
 				</table>
 
+			<%-- 条件を付与して送信 --%>
+			<input type="hidden" name="f1" value="${year}">
+			<input type="hidden" name="f2" value="${num}">
+			<input type="hidden" name="f3" value="${subject.cd}">
+			<input type="hidden" name="f4" value="${no}">
+
 			<input type="submit" value="登録して終了"></form>
 		</c:when>
 	</c:choose>
