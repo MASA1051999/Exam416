@@ -64,6 +64,10 @@ public class TestRegistAction extends Action {
 			req.setAttribute("num", Num);
 
 			//リクエストに値をセット
+			req.setAttribute("f1", entYearStr);
+			req.setAttribute("f2", classNum);
+			req.setAttribute("f3", subjectCd);
+			req.setAttribute("f4", Num);
 
 			}//1つでも値が入力されていたとき…入力が不足しているとき
 			else {
