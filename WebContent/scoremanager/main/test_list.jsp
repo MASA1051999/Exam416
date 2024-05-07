@@ -33,7 +33,7 @@
 			<select name="f3">
 				<option value="0">------</option>
 				<c:forEach var="subject" items="${subjects}">
-					<option value="${subject.name}" <c:if test="${subject==f3}">selected</c:if>>${subject.name}</option>
+					<option value="${subject.cd}" <c:if test="${subject==f3}">selected</c:if>>${subject.name}</option>
 				</c:forEach>
 			</select>
 
