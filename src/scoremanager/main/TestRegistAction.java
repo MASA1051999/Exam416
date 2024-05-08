@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Student;
 import bean.Teacher;
 import bean.Test;
+import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -24,6 +26,7 @@ public class TestRegistAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");//ログインユーザー
 		TestDao tDao = new TestDao();// クラス番号Daoを初期化
 		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
+		StudentDao sDao = new StudentDao();//学生Daoを初期化
 		Util util = new Util();//utilの初期化
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
 		String subjectName = "";//科目名を初期化
@@ -38,6 +41,8 @@ public class TestRegistAction extends Action {
 
 
 		//DBからデータ取得 3
+		List<Student> student_list = sDao.filter(teacher.getSchool(), Integer.parseInt(entYearStr), classNum);
+
 		//検索条件の指定によって、3、6の処理を行うか分岐する
 		//クラス番号、入学年度、科目、試験回数を取得し、リクエスト属性に保存
 		util.setClassNumSet(req);
@@ -68,6 +73,7 @@ public class TestRegistAction extends Action {
 			req.setAttribute("f2", classNum);
 			req.setAttribute("f3", subjectCd);
 			req.setAttribute("f4", Num);
+			req.setAttribute("f5", student_list);
 
 
 			}//1つでも値が入力されていたとき…入力が不足しているとき
