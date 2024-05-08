@@ -41,7 +41,7 @@ public class TestRegistAction extends Action {
 
 
 		//DBからデータ取得 3
-		List<Student> student_list = sDao.filter(teacher.getSchool(), Integer.parseInt(entYearStr), classNum);
+
 
 		//検索条件の指定によって、3、6の処理を行うか分岐する
 		//クラス番号、入学年度、科目、試験回数を取得し、リクエスト属性に保存
@@ -56,6 +56,7 @@ public class TestRegistAction extends Action {
 
 			//全てに値が入力されていた場合
 			if(!entYearStr.equals("0") && !classNum.equals("0") && !subjectCd.equals("0") && !Num.equals("0")){
+			List<Student> student_list = sDao.filter(teacher.getSchool(), Integer.parseInt(entYearStr), classNum);
 			//テスト回数を整数に直す
 			testNum = Integer.parseInt(Num);
 			//科目名を取得
