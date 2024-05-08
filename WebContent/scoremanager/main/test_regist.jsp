@@ -69,14 +69,14 @@
 						<th>点数</th>
 					</tr>
 					<%-- 取得したテスト結果の表示 --%>
-						<c:forEach var="test" items="${f5}">
+						<c:forEach var="test" items="${test_list}">
 							<tr>
-								<td>${test.entYear}</td>
+								<td>${test.student.entYear}</td>
 								<td>${test.classNum}</td>
-								<td>${test.no}</td>
-								<td>${test.name}</td>
+								<td>${test.student.no}</td>
+								<td>${test.student.name}</td>
 								<td>
-									<input type="text" name="point_${test.no}" required/>
+									<input type="text" name="point_${test.student.no}" value="${test.point}" required/>
 									<%-- 0～100の範囲で入力してください、と表示する --%>
 									<div>${errors.get("test_error")}</div>
 								</td>
