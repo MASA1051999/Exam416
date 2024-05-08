@@ -59,13 +59,13 @@
 	<%-- ここから検索結果表示 --%>
 	<c:choose>
 		<%-- 検索結果が0件のとき --%>
-		<c:when test="${studentTests.sise()=0}">
+		<c:when test="${empty sTests}">
 			<p>学生情報が存在しませんでした</p>
 		</c:when>
 
 		<%-- 検索結果が1件以上のとき --%>
-		<c:when test="${studentTests.size()>0}">
-			<div>氏名：${studentName}(${studentCd })</div>
+		<c:when test="${!empty sTests}">
+			<div>氏名：${student.name}(${student.no})</div>
 
 			<table class="table table-hover">
 					<tr>
@@ -74,7 +74,7 @@
 						<th>回数</th>
 						<th>点数</th>
 					</tr>
-					<c:forEach var="test" items="${studentTests}">
+					<c:forEach var="test" items="${sTests}">
 						<tr>
 							<td>${test.subjectName}</td>
 							<td>${test.subjectCd}</td>

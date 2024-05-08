@@ -33,11 +33,11 @@ public class TestListStudentDao {
 		ResultSet rSet = null;
 
 		//testとsubjectをsubject_cdで結合
-		String baseSql = "select * from subject join test on subject.subject_cd =test.subject_cd";
+		String baseSql = "select name,subject.subject_cd,no,point from subject join test on subject.subject_cd =test.subject_cd";
 
-		String condition = " where student_no=? and test.school_cd=?";
+		String condition = " where student_no=? and subject.school_cd=?";
 
-		String order = " order by subject_cd asc,test.no asc";
+		String order = " order by subject.subject_cd asc,test.no asc";
 
 		try{
 
@@ -88,14 +88,13 @@ public class TestListStudentDao {
 	 * @return List<TestListStudent>
 	 */
 	private List<TestListStudent> postFilter(ResultSet rSet){
-		//リストを初期化
 		List<TestListStudent> list = new ArrayList<>();
-		TestListStudent tls = new TestListStudent();
-
 		try {
 			while (rSet.next()) {//検索結果が存在するなら、リストに追加
+				//リストを初期化
+				TestListStudent tls = new TestListStudent();
+
 				tls.setSubjectName(rSet.getString("name"));
-				//どのsubject_cdか指定しないといけないかも
 				tls.setSubjectCd(rSet.getString("subject_cd"));
 				tls.setNum(rSet.getInt("no"));
 				tls.setPoint(rSet.getInt("point"));
