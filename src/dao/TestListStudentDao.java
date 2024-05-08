@@ -35,7 +35,7 @@ public class TestListStudentDao {
 		//testとsubjectをsubject_cdで結合
 		String baseSql = "select * from subject join test on subject.subject_cd =test.subject_cd";
 
-		String condition = " where student_no=?";
+		String condition = " where student_no=? and test.school_cd=?";
 
 		String order = " order by subject_cd asc,test.no asc";
 
@@ -47,6 +47,7 @@ public class TestListStudentDao {
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, student.getNo());
+			statement.setString(2, student.getSchool().getCd());
 
 			//プリペアードステートメントを実行
 			//SQL文を実行する
