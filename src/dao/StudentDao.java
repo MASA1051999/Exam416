@@ -181,6 +181,67 @@ public class StudentDao  extends Dao{
 	return list;
 	}
 
+	/**
+	 * filterメソッド 学校、入力年度、クラス番号をもとに、学生一覧を取得
+	 * @param school
+	 * @param entYear
+	 * @param classNum
+	 * @return List<student>
+	 * @throws Exception
+	 */
+	public List<Student> filter(School school, int entYear, String classNum) throws Exception {
+		List<Student> list = new ArrayList<>();
+
+		//データベースへのコネクションを確立
+		Connection connection = getConnection();
+
+		//プリペアードステートメント
+		PreparedStatement statement = null;
+
+		ResultSet rSet = null;
+
+		String condition = " and ent_year=? and class_num=?";
+
+		String order = " order by no asc";
+
+		try{
+
+			//プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(baseSql + condition + order );
+
+			//プレースホルダー（？の部分）に値を設定
+			statement.setString(1, school.getCd());
+			statement.setInt(2, entYear);
+			statement.setString(3, classNum);
+
+			//プリペアードステートメントを実行
+			//SQL文を実行する
+			//結果はリザルトセット型となる
+			rSet = statement.executeQuery();
+			list = postFilter(rSet, school);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			//プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+
+		//コネクションを閉じる
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+		}
+	}
+	return list;
+	}
 
 	/**
 	 * filterメソッド 学校、入学年度、在学フラグを指定して学生の一覧を取得する
