@@ -64,7 +64,7 @@
 		</c:when>
 
 		<%-- 検索結果が1件以上のとき、科目別成績一覧を表示 --%>
-		<c:when test="${subjectTests.size()>0}">
+		<c:when test="${!empty subjectTests}">
 			<div>科目：${subjectName}</div>
 
 			<table class="table table-hover">
@@ -85,11 +85,13 @@
 							<td>${test.studentName}</td>
 							<%-- 試験回数が存在するかで分岐 --%>
 							<td>
-								${test.point.1}
-							</td>
+								<c:choose>
+									<c:when test="${!empty test.getPoint(1)}">${test.getPoint(1)}</c:when>
+									<c:otherwise>-</c:otherwise>
+								</c:choose>
 							<td>
 								<c:choose>
-									<c:when test="${!empty test.point[2]}">${test.point[2]}</c:when>
+									<c:when test="${!empty test.getPoint(2)}">${test.getPoint(2)}</c:when>
 									<c:otherwise>-</c:otherwise>
 								</c:choose>
 							</td>

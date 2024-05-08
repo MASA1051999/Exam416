@@ -1,6 +1,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestListSubject implements Serializable{
@@ -32,7 +33,7 @@ public class TestListSubject implements Serializable{
 	/**
 	 * test
 	 */
-	private Map<Integer, Integer> points;
+	private Map<Integer, Integer> points = new HashMap<>();
 
 
 
@@ -95,9 +96,9 @@ public class TestListSubject implements Serializable{
 	/**
 	 * 渡された回数に対応した点数を返す
 	 */
-	public String getPoint(int key){
-		String point = String.valueOf(this.points.get(key));
-		return point;
+	public int getPoint(int key){
+	return points.get(key);
+
 	}
 
 	/**
@@ -106,7 +107,15 @@ public class TestListSubject implements Serializable{
 	 * @param value
 	 */
 	public void setPoint(int key,int value){
-		this.points.put(key, value);
+		points.put(key, value);
+	}
+
+	/**
+	 * 渡されたキーに対応する値をマップから削除
+	 * @param key
+	 */
+	public void removePoint(int key){
+		points.remove(key);
 	}
 
 }

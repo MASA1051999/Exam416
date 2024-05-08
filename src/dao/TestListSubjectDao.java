@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import bean.School;
 import bean.Subject;
@@ -20,7 +21,6 @@ public class TestListSubjectDao {
 
 		try {
 			while (rSet.next()) {
-
 				tls.setEntYear(rSet.getInt("ent_year"));
 				tls.setStudentNo(rSet.getString("no"));
 				tls.setStudentName(rSet.getString("name"));
@@ -53,14 +53,14 @@ public class TestListSubjectDao {
 		//リザルトセット
 		ResultSet rSet = null;
 
-		//studentとtestをstudent_noでjoinする。
-		String baseSql = "select ent_year,student.no,name,test.class_num,test.no as num,point from student join test on student.no =test.student_no";
+		//studentとtestとsubjectをstudent_noでjoinする。
+		String baseSql = "select ent_year,student.no,name,test.class_num,subject_cd,test.no as num,point from student join test on student.no =test.student_no";
 
 		//条件指定
 		String condition = " where test.school_cd=? and test.class_num=? and subject_cd=? and ent_year=?";
 
-		//学生コードの昇順
-		String order = " order by num asc";
+		//学生コード、回数の昇順
+		String order = " order by student.no asc,num asc";
 
 		try{
 
@@ -81,6 +81,8 @@ public class TestListSubjectDao {
 
 			//結果をリストに格納
 			list= postFilter(rSet);
+			//クラス、入学年度、学生番号、学生名が重複するインスタンスを1つにまとめる処理
+			filter(list);
 
 		} catch (Exception e) {
 			throw e;
@@ -104,5 +106,35 @@ public class TestListSubjectDao {
 		}
 	}
 	return list;
+	}
+
+	/**
+	 * クラス、入学年度、学生番号、学生名が重複するインスタンスを一つにまとめる
+	 * @param list
+	 * @return
+	 */
+	private List<TestListSubject> filter(List<TestListSubject> list){
+		int num = 0;
+		//要素が2件以上あるなら実行
+		while(list.size()>num+1){
+			//まとめるもとのインスタンス、マップを取得
+			TestListSubject test = list.get(num);
+			Map<Integer, Integer> map = test.getPoints();
+
+			//mapからキーを取り出す
+			int key = 0;
+			for(Integer mapkey :map.keySet()){
+				key = mapkey;
+			}
+
+				//クラス、入学年度、学生番号、学生名が一致するなら、テスト結果のインスタンスを一つにまとめる。
+				if(test.getClassNum()==list.get(num+1).getClassNum() && test.getEntYear()==list.get(num+1).getEntYear() && test.getStudentName()==list.get(num+1).getStudentName() && test.getStudentNo()==list.get(num+1).getStudentNo()){
+					list.get(num+1).setPoint(key, map.get(key));
+					list.remove(num);
+				}
+
+				num++;
+		}
+		return list;
 	}
 }
