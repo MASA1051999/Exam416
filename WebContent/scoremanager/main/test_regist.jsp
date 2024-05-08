@@ -76,7 +76,7 @@
 								<td>${test.no}</td>
 								<td>${test.name}</td>
 								<td>
-									<input type="text" name="point_${test.no}"/>
+									<input type="text" name="point_${test.no}" required/>
 									<%-- 0～100の範囲で入力してください、と表示する --%>
 									<div>${errors.get("test_error")}</div>
 								</td>
