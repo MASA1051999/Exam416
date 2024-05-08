@@ -40,7 +40,7 @@
 
 		<button>検索</button>
 
-		<div>${error.get("error")}</div>
+		<div>${error.get("error1")}</div>
 	</form>
 
 	<form action="TestListStudentExecute.action">
@@ -56,6 +56,8 @@
 			<%-- 学生情報識別コード --%>
 			<input type="hidden" name="f" value="st">
 		<button>検索</button>
+
+		<div>${error.get("error2")}</div>
 	</form>
 
 	<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>

@@ -26,7 +26,13 @@ public class TestListStudentExecuteAction extends Action{
 		StudentDao sDao = new StudentDao();//科目Dao
 		TestListStudentDao tDao = new TestListStudentDao();//テストDao初期化
 		List<TestListStudent> test = new ArrayList<>();//検索結果を保存
-		Map<String, String> error = new HashMap<>();// エラーメッセージ
+		Map<String, String> errors = new HashMap<>();// エラーメッセージ
+		Util util = new Util();
+
+		util.setClassNumSet(req);
+		util.setEntyearSet(req);
+		util.setSubjects(req);
+		util.setNumSet(req);
 
 		//リクエストパラメータ―の取得 2
 		String studentNum = req.getParameter("f4");
@@ -50,8 +56,8 @@ public class TestListStudentExecuteAction extends Action{
 			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 
 		}else{
-			error.put("error", "成績情報が存在しませんでした");
-			req.setAttribute("error", error);
+			errors.put("error2", "成績情報が存在しませんでした");
+			req.setAttribute("error", errors);
 			req.setAttribute("f4", studentNum);
 
 			req.getRequestDispatcher("test_list.jsp").forward(req, res);

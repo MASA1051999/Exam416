@@ -26,7 +26,7 @@ public class TestListSubjectExecuteAction extends Action{
 		SubjectDao sDao = new SubjectDao();//科目Dao
 		TestListSubjectDao tDao = new TestListSubjectDao();//テストDao初期化
 		List<TestListSubject> test = new ArrayList<>();
-		Map<String, String> error = new HashMap<>();// エラーメッセージ
+		Map<String, String> errors = new HashMap<>();// エラーメッセージ
 		Util util = new Util();
 
 		String entyear = "";
@@ -39,10 +39,6 @@ public class TestListSubjectExecuteAction extends Action{
 		classnum = req.getParameter("f2");
 		subject = sDao.get(req.getParameter("f3"), teacher.getSchool());
 
-		util.setClassNumSet(req);
-		util.setEntyearSet(req);
-		util.setSubjects(req);
-
 		//全てに値が入力されていた場合
 		//DBからデータ取得 3
 		if(!entyear.equals("0") && !classnum.equals("0") && subject != null){
@@ -54,11 +50,18 @@ public class TestListSubjectExecuteAction extends Action{
 			req.setAttribute("subjectTests",test);
 			req.setAttribute("subjectName", subject.getName());
 
+			util.setClassNumSet(req);
+			util.setEntyearSet(req);
+			util.setSubjects(req);
+
 			req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 
 		}else{
-			error.put("error", "入学年度とクラスと科目を選択してください");
-			req.setAttribute("error", error);
+			errors.put("error1", "入学年度とクラスと科目を選択してください");
+			req.setAttribute("error", errors);
+			util.setClassNumSet(req);
+			util.setEntyearSet(req);
+			util.setSubjects(req);
 
 			req.getRequestDispatcher("test_list.jsp").forward(req, res);
 		}
