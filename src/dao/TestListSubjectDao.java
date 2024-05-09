@@ -17,10 +17,10 @@ public class TestListSubjectDao {
 	private List<TestListSubject> postFilter(ResultSet rSet) throws Exception {
 		//リストを初期化
 		List<TestListSubject> list = new ArrayList<>();
-		TestListSubject tls = new TestListSubject();
 
 		try {
 			while (rSet.next()) {
+				TestListSubject tls = new TestListSubject();
 				tls.setEntYear(rSet.getInt("ent_year"));
 				tls.setStudentNo(rSet.getString("no"));
 				tls.setStudentName(rSet.getString("name"));
@@ -118,7 +118,14 @@ public class TestListSubjectDao {
 		//要素が2件以上あるなら実行
 		while(list.size()>num+1){
 			//まとめるもとのインスタンス、マップを取得
-			TestListSubject test = list.get(num);
+			//深いコピーを実施
+			TestListSubject test = new TestListSubject();
+			test.setEntYear(list.get(num).getEntYear());
+			test.setStudentNo(list.get(num).getStudentNo());
+			test.setStudentName(list.get(num).getStudentName());
+			test.setClassNum(list.get(num).getClassNum());
+			test.setPoints(list.get(num).getPoints());
+
 			Map<Integer, Integer> map = test.getPoints();
 
 			//mapからキーを取り出す
@@ -130,7 +137,7 @@ public class TestListSubjectDao {
 				//クラス、入学年度、学生番号、学生名が一致するなら、テスト結果のインスタンスを一つにまとめる。
 				if(test.getClassNum()==list.get(num+1).getClassNum() && test.getEntYear()==list.get(num+1).getEntYear() && test.getStudentName()==list.get(num+1).getStudentName() && test.getStudentNo()==list.get(num+1).getStudentNo()){
 					list.get(num+1).setPoint(key, map.get(key));
-					list.remove(num);
+					System.out.print(list.remove(num).getStudentName());
 				}
 
 				num++;
