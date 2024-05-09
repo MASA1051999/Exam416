@@ -25,7 +25,7 @@ public class TestRegistExecuteAction extends Action {
 		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
 		List<Test> lists = new ArrayList<>();
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
-		System.out.print("a");
+
 		//リクエストパラメータ―の取得 2
 		String entYearStr = req.getParameter("f1");//入学年度
 		String classNum = req.getParameter("f2");//クラス番号
@@ -45,6 +45,7 @@ public class TestRegistExecuteAction extends Action {
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
+
 		tDao.save(lists);
 
 		req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);

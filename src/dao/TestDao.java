@@ -116,21 +116,23 @@ public class TestDao extends Dao {
 
 		ResultSet rSet = null;
 
-		String condition = " where ent_year=? and student.class_num=? and subject_cd=? and test.no=? and student.school_cd=?";
+		String condition = " where ent_year=? and student.class_num=? and (subject_cd=? or subject_cd is null) and (test.no=? or test.no is null) and student.school_cd=?";
 
 		String order = " order by student_no asc";
 
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement(baseSql + " join student on test.student_no = student.no"+ condition  + order );
+			statement = connection.prepareStatement("select ent_year, student.class_num, student.no as student_no, isnull(subject_cd, ?) as subject_cd, isnull(test.no, ?) as no, isnull(point, null) as point from test right outer join student on test.student_no = student.no"+ condition  + order );
 
 			//プレースホルダー（？の部分）に値を設定
-			statement.setInt(1, entYear);
-			statement.setString(2, classNum);
-			statement.setString(3, subject.getCd());
-			statement.setInt(4, num);
-			statement.setString(5, school.getCd());
+			statement.setString(1, subject.getCd());
+			statement.setInt(2, num);
+			statement.setInt(3, entYear);
+			statement.setString(4, classNum);
+			statement.setString(5, subject.getCd());
+			statement.setInt(6, num);
+			statement.setString(7, school.getCd());
 
 			//プリペアードステートメントを実行
 			//SQL文を実行する
@@ -163,47 +165,53 @@ public class TestDao extends Dao {
 
 	public boolean save(List<Test> list) throws Exception {
 
-		//データベースへのコネクションを確立
-		Connection connection = getConnection();
+
 
 		int count =0;
 		//値がカウントされたら失敗する
-		try{
+
 			for (Test test:list){
-				boolean bool = save(test, connection);
+				//データベースへのコネクションを確立
+				Connection connection = getConnection();
+				try{
+					boolean bool = save(test, connection);
 				if(bool != true){
 					count++;
 				}
+				}catch (Exception e) {
+					throw e;
+				} finally {
+					//プリペアードステートメントを閉じる
+//					if (statement != null) {
+//						try {
+//							statement.close();
+//						} catch (SQLException sqle) {
+//							throw sqle;
+//						}
+//					}
 
-			}
-
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			//プリペアードステートメントを閉じる
-//			if (statement != null) {
-//				try {
-//					statement.close();
-//				} catch (SQLException sqle) {
-//					throw sqle;
-//				}
-//			}
-
-			//コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
+					//コネクションを閉じる
+					if (connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
 				}
+
+
 			}
-		}
+
+
+
 		if (count == 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
 
 
 	private boolean save(Test test, Connection connection) throws Exception {
@@ -273,37 +281,27 @@ public class TestDao extends Dao {
 
 	}
 
-}
-//	public boolean delete(List<Test> list) throws Exception {
-//
-//		//データベースへのコネクションを確立
-//		Connection connection = getConnection();
-//
-//		//プリペアードステートメント
-//		PreparedStatement statement = null;
-//
-//		int count =0;
-//
-//		try{
-//			Test old = get(list.getClass());
-//			//データが存在するなら削除
-//			if (old != null) {
-//			//プリペアードステートメントにSQL文をセット
-//			statement = connection.prepareStatement("delete from subject where school_cd=? and subject_cd=?");
-//
-//			//プレースホルダー（？の部分）に値を設定
-//			statement.setString(1, school.getCd());
-//			statement.setString(2, subject.getCd());
-//			}
-//
-//		//プリペアードステートメントを実行
-//		//SQL文を実行する
-//		//結果は実行した列数
-//		count = statement.executeUpdate();
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-//			//プリペアードステートメントを閉じる
+
+	public boolean delete(List<Test> list) throws Exception {
+
+		//データベースへのコネクションを確立
+		Connection connection = getConnection();
+
+		int count =0;
+		//値がカウントされたら失敗する
+		try{
+			for (Test test:list){
+				boolean bool = delete(test, connection);
+				if(bool != true){
+					count++;
+				}
+
+			}
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			//プリペアードステートメントを閉じる
 //			if (statement != null) {
 //				try {
 //					statement.close();
@@ -311,24 +309,84 @@ public class TestDao extends Dao {
 //					throw sqle;
 //				}
 //			}
-//
-//			//コネクションを閉じる
-//			if (connection != null) {
-//				try {
-//					connection.close();
-//				} catch (SQLException sqle) {
-//					throw sqle;
-//				}
-//			}
-//		}
-//		if (count > 0) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
-//}
-//
+
+			//コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
+	private boolean delete(Test test, Connection connection) throws Exception {
+		//データベースへのコネクションを確立
+
+				//プリペアードステートメント
+				PreparedStatement statement = null;
+
+				int count =0;
+
+				try{
+					Test old = get(test.getStudent(), test.getSubject(), test.getSchool(), test.getNo());
+					//データが存在しないなら追加、存在するなら更新
+					if (old != null) {
+					//プリペアードステートメントにSQL文をセット
+					statement = connection.prepareStatement("delete from test where student_no=? and subject_cd=? and school_cd=? and no=?");
+
+					//プレースホルダー（？の部分）に値を設定
+					statement.setString(1,test.getStudent().getNo() );
+					statement.setString(2, test.getSubject().getCd());
+					statement.setString(3, test.getSchool().getCd());
+					statement.setInt(4, test.getNo());
+
+					}
+
+
+
+				//プリペアードステートメントを実行
+				//SQL文を実行する
+				//結果は実行した列数
+				count = statement.executeUpdate();
+				} catch (Exception e) {
+					throw e;
+				} finally {
+					//プリペアードステートメントを閉じる
+					if (statement != null) {
+						try {
+							statement.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
+
+					//コネクションを閉じる
+					if (connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
+				}
+				if (count > 0) {
+					return true;
+				} else {
+					return false;
+				}
+	}
+}
+
+
 
 
 
