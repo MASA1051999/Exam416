@@ -34,9 +34,10 @@ public class TestRegistExecuteAction extends Action {
 		List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get(subjectCd, teacher.getSchool()),Integer.parseInt(Num), teacher.getSchool());
 
 		for (Test test : list) {
-		String point =	req.getParameter("point_" + test.getStudent().getNo());
-		test.setPoint(Integer.parseInt(point));
-		lists.add(test);
+			String point =	req.getParameter("point_" + test.getStudent().getNo());
+			if(point != "")
+				test.setPoint(Integer.parseInt(point));
+			lists.add(test);
 		}
 
 

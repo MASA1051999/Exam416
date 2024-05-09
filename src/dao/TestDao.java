@@ -123,7 +123,7 @@ public class TestDao extends Dao {
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select ent_year, student.class_num, student.no as student_no, isnull(subject_cd, ?) as subject_cd, isnull(test.no, ?) as no, isnull(point, null) as point from test right outer join student on test.student_no = student.no"+ condition  + order );
+			statement = connection.prepareStatement("select ent_year, student.class_num, student.no as student_no, isnull(subject_cd, ?) as subject_cd, coalesce(test.no, ?) as no, coalesce(point, null) as point from test right outer join student on test.student_no = student.no"+ condition  + order );
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, subject.getCd());
