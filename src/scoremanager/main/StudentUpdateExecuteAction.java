@@ -49,7 +49,7 @@ public class StudentUpdateExecuteAction extends Action {
 			// インスタンスに値をセット
 			student.setName(name);
 			student.setClassNum(classNum);
-			student.setAttend(true);
+			student.setAttend(isAttend);
 			// 学生を保存
 			sDao.save(student);
 		} else {
