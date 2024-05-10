@@ -10,7 +10,7 @@ public class Test implements Serializable {
 	private Subject subject;
 	private School school;
 	private int no;
-	private int point;
+	private int point = -1;
 
 	public Student getStudent() {
 		return student;

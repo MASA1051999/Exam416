@@ -43,10 +43,9 @@
 		<label>回数</label>
 		<select name="f4">
 			<option value="0">------</option>
-			<c:forEach var="no" items="${numList}">
-				<%-- 現在のnoと選択されていたf4が一致していた場合selectedを追記 --%>
-				<option value="${no}" <c:if test="${no==f4}">selected</c:if>>${no}</option>
-			</c:forEach>
+			<option value="1"<c:if test="${num==1}">selected</c:if>>1</option>
+			<option value="2"<c:if test="${num==2}">selected</c:if>>2</option>
+
 		</select>
 
 		<button>検索</button>

@@ -86,7 +86,7 @@ public class TestRegistAction extends Action {
 
 
 		//ビジネスロジック 4
-		//なし
+
 
 		//DBへデータ保存 5
 		//なし
