@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,8 @@ public class TestRegistExecuteAction extends Action {
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");// ログインユーザーを取得
 		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
+		Pattern pattern = Pattern.compile("[0-9]+");
+		int intpoint = 0;
 		List<Test> lists = new ArrayList<>();
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
 
@@ -35,8 +39,20 @@ public class TestRegistExecuteAction extends Action {
 
 		for (Test test : list) {
 			String point =	req.getParameter("point_" + test.getStudent().getNo());
-			if(point != "")
-				test.setPoint(Integer.parseInt(point));
+			Matcher matcher = pattern.matcher(point);
+
+			//正規表現に一致するか確認
+			if(matcher.find())
+
+				//0以上100以下か確認
+				intpoint = Integer.parseInt(point);
+				if(intpoint>=0 && intpoint<=100){
+					test.setPoint(intpoint);
+				}
+			else{
+				req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+			}
+
 			lists.add(test);
 		}
 
