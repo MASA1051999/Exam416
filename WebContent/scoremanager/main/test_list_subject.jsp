@@ -85,15 +85,14 @@
 							<td>${test.studentName}</td>
 							<%-- 試験回数が存在するかで分岐 --%>
 							<td>
-								<c:choose>
-									<c:when test="${!empty test.getPoint(1)}">${test.getPoint(1)}</c:when>
-									<c:otherwise>-</c:otherwise>
-								</c:choose>
+								<c:if test="${test.getPoint(1) != -1}">${test.getPoint(1)}</c:if>
+
+								<c:if test="${test.getPoint(2) == -1}" >-</c:if>
 							<td>
-								<c:choose>
-									<c:when test="${!empty test.getPoint(2)}">${test.getPoint(2)}</c:when>
-									<c:otherwise>-</c:otherwise>
-								</c:choose>
+								<c:if test="${test.getPoint(2) != -1}">${test.getPoint(2)}</c:if>
+
+								<c:if test="${test.getPoint(2) != -1}" >-</c:if>
+
 							</td>
 
 						</tr>

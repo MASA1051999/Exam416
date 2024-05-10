@@ -54,6 +54,7 @@ public class TestListSubjectExecuteAction extends Action{
 			util.setEntyearSet(req);
 			util.setSubjects(req);
 
+
 			req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 
 		}else{

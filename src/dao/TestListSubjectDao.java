@@ -137,7 +137,9 @@ public class TestListSubjectDao {
 				//クラス、入学年度、学生番号、学生名が一致するなら、テスト結果のインスタンスを一つにまとめる。
 				if(test.getClassNum()==list.get(num+1).getClassNum() && test.getEntYear()==list.get(num+1).getEntYear() && test.getStudentName()==list.get(num+1).getStudentName() && test.getStudentNo()==list.get(num+1).getStudentNo()){
 					list.get(num+1).setPoint(key, map.get(key));
+					list.remove(num+1);
 				}
+
 
 				num++;
 		}
