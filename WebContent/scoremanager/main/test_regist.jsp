@@ -75,9 +75,16 @@
 								<td>${test.student.no}</td>
 								<td>${test.student.name}</td>
 								<td>
-									<input type="text" name="point_${test.student.no}" value="${test.point}"/>
+									<c:if test="${test.point != -1}">
+										<input type="text" name="point_${test.student.no}" value="${test.point}"/>
+									</c:if>
+
+									<c:if test="${test.point == -1}">
+										<input type="text" name="point_${test.student.no}"/>
+									</c:if>
+
 									<%-- 0～100の範囲で入力してください、と表示する --%>
-									<div>${errors.get("test_error")}</div>
+										<div>${errors.get("test_error")}</div>
 								</td>
 							</tr>
 						</c:forEach>
