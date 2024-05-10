@@ -33,7 +33,8 @@ public class TestListSubject implements Serializable{
 	/**
 	 * 初期値は1、2回目ともに-1
 	 */
-	private Map<Integer, Integer> points = new HashMap<>();{
+	private Map<Integer, Integer> points = new HashMap<>();
+	{
         points.put(1, -1);
         points.put(2, -1);
     }

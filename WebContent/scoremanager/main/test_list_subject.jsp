@@ -87,11 +87,11 @@
 							<td>
 								<c:if test="${test.getPoint(1) != -1}">${test.getPoint(1)}</c:if>
 
-								<c:if test="${test.getPoint(2) == -1}" >-</c:if>
+								<c:if test="${test.getPoint(1) == -1}" >-</c:if>
 							<td>
 								<c:if test="${test.getPoint(2) != -1}">${test.getPoint(2)}</c:if>
 
-								<c:if test="${test.getPoint(2) != -1}" >-</c:if>
+								<c:if test="${test.getPoint(2) == -1}" >-</c:if>
 
 							</td>
 
