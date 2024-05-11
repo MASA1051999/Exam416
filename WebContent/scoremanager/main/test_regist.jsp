@@ -36,7 +36,7 @@
 			<option value="0">------</option>
 			<c:forEach var="subject" items="${subjects}">
 				<%-- 現在のsubject.cdと選択されていたf3が一致していた場合selectedを追記 --%>
-				<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.cd}</option>
+				<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
 			</c:forEach>
 		</select>
 
@@ -76,15 +76,17 @@
 								<td>${test.student.name}</td>
 								<td>
 									<c:if test="${test.point != -1}">
-										<input type="text" name="point_${test.student.no}" value="${test.point}"/>
+										<input type="number" name="point_${test.student.no}" value="${test.point}"/>
 									</c:if>
 
 									<c:if test="${test.point == -1}">
-										<input type="text" name="point_${test.student.no}"/>
+										<input type="number" name="point_${test.student.no}"/>
 									</c:if>
 
 									<%-- 0～100の範囲で入力してください、と表示する --%>
-										<div>${errors.get("test_error")}</div>
+										<div>${errors.get("point")}</div>
+									<%-- 値を入力してください、と表示する --%>
+										<div>${errors.get("null_point")}</div>
 								</td>
 							</tr>
 						</c:forEach>
