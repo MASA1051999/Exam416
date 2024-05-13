@@ -69,7 +69,7 @@ public class TestRegistAction extends Action {
 			req.setAttribute("subjectName", subjectName);
 
 			//テストが存在しない場合
-			if(list != null){
+			if(list.size() == 0){
 				errors.put("test_null", "テストが存在しませんでした");
 				req.setAttribute("errors",errors);
 			}

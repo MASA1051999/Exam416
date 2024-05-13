@@ -38,13 +38,27 @@
 
 	<!-- パスワード 未入力を許可しない-->
 	<label>パスワード</label>
-	<input type="password" name="password" value="111" required>
+	<input type="password" name="password" id="password" value="111" required>
+
+	<input type="checkbox" name="chk_d_ps" id="check" onchange="checkfunction()">
+	<label for="check">パスワードを表示</label>
 
 	<!-- ログイン用ボタン -->
 	<input type="submit" name="login" value="ログイン"/>
 
 </form>
 
+<script type="text/javascript">
+	function checkfunction() {
+		  var check = document.getElementById('check');
+		  var password = document.getElementById('password');
+		  if (check.checked == true) {
+		    password.type = 'text';
+		  } else {
+		    password.type = 'password';
+		  }
+		}
+</script>
 
 </body>
 </html>
