@@ -67,9 +67,12 @@ public class TestRegistAction extends Action {
 			//リクエストにテストリスト、科目名、試験回数をセット
 			req.setAttribute("test_list", list);
 			req.setAttribute("subjectName", subjectName);
-			req.setAttribute("num", Num);
 
-
+			//テストが存在しない場合
+			if(list != null){
+				errors.put("test_null", "テストが存在しませんでした");
+				req.setAttribute("errors",errors);
+			}
 
 
 			}//1つでも値が入力されていたとき…入力が不足しているとき
@@ -84,10 +87,13 @@ public class TestRegistAction extends Action {
 		//ビジネスロジック 4
 
 
+
 		//DBへデータ保存 5
 		//なし
 
 		//レスポンス値をセット 6
+		req.setAttribute("num", Num);
+
 		req.setAttribute("f1", entYearStr);
 		req.setAttribute("f2", classNum);
 		req.setAttribute("f3", subjectCd);

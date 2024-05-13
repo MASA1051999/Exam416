@@ -55,7 +55,12 @@
 	<%-- testキーに保存された内容を表示 --%>
 	<div>${errors.get("test")}</div>
 
+	<%-- test_nullキーに保存された内容を表示 --%>
+	<div>${errors.get("test_null") }</div>
+
 	<c:choose>
+
+		<%-- テストが存在する場合 --%>
 		<c:when test="${test_list.size()>0}">
 			<h2>科目：${subjectName}(${num}回)</h2>
 			<form action="TestRegistExecute.action">
@@ -80,11 +85,11 @@
 								<td>${test.student.name}</td>
 								<td>
 									<c:if test="${test.point != -1}">
-										<input type="number" name="point_${test.student.no}" value="${test.point}" placeholder="0～100の範囲で入力してください"/>
+										<input type="number" name="point_${test.student.no}" value="${test.point}"/>
 									</c:if>
 
 									<c:if test="${test.point == -1}">
-										<input type="number" name="point_${test.student.no}" placeholder="0～100の範囲で入力してください"/>
+										<input type="number" name="point_${test.student.no}"/>
 									</c:if>
 
 								</td>
