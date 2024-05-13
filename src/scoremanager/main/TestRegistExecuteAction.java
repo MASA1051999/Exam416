@@ -60,6 +60,11 @@ public class TestRegistExecuteAction extends Action {
 				req.setAttribute("subjectName", subjectDao.get(subjectCd, teacher.getSchool()).getName());
 				req.setAttribute("num", Num);
 
+				req.setAttribute("f1", entYearStr);
+				req.setAttribute("f2", classNum);
+				req.setAttribute("f3", subjectCd);
+				req.setAttribute("f4", Num);
+
 				req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 			}
 
@@ -82,6 +87,11 @@ public class TestRegistExecuteAction extends Action {
 				req.setAttribute("test_list", list);
 				req.setAttribute("subjectName", subjectDao.get(subjectCd, teacher.getSchool()).getName());
 				req.setAttribute("num", Num);
+
+				req.setAttribute("f1", entYearStr);
+				req.setAttribute("f2", classNum);
+				req.setAttribute("f3", subjectCd);
+				req.setAttribute("f4", Num);
 
 				req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 
