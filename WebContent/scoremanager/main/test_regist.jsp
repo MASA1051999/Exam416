@@ -80,11 +80,11 @@
 								<td>${test.student.name}</td>
 								<td>
 									<c:if test="${test.point != -1}">
-										<input type="number" name="point_${test.student.no}" value="${test.point}"/>
+										<input type="number" name="point_${test.student.no}" value="${test.point}" placeholder="0～100の範囲で入力してください"/>
 									</c:if>
 
 									<c:if test="${test.point == -1}">
-										<input type="number" name="point_${test.student.no}"/>
+										<input type="number" name="point_${test.student.no}" placeholder="0～100の範囲で入力してください"/>
 									</c:if>
 
 								</td>

@@ -39,33 +39,21 @@ public class TestRegistExecuteAction extends Action {
 
 		//ビジネスロジック
 		for (Test test : list) {
+			Test copy = new Test();
+			copy.setClassNum(test.getClassNum());
+			copy.setSchool(test.getSchool());
+			copy.setStudent(test.getStudent());
+			copy.setSubject(test.getSubject());
+			copy.setNo(test.getNo());
+			copy.setPoint(test.getPoint());
+
 			//点数を文字列型で取得
 			String point =	req.getParameter("point_" + test.getStudent().getNo());
 
-			//空文字列でないか確認
+			//空文字の場合、リストから削除
 			if(point.equals("")){
-				//エラーメッセージをセット
-				errors.put("null_point", "値を入力してください");
-				//属性名はerrors
-				req.setAttribute("errors" , errors);
-
-				//リクエストに値をセット
-				util.setClassNumSet(req);
-				util.setEntyearSet(req);
-				util.setSubjects(req);
-				util.setNumSet(req);
-
-				//リクエストにテスト結果一覧、科目名、試験回数をセット
-				req.setAttribute("test_list", list);
-				req.setAttribute("subjectName", subjectDao.get(subjectCd, teacher.getSchool()).getName());
-				req.setAttribute("num", Num);
-
-				req.setAttribute("f1", entYearStr);
-				req.setAttribute("f2", classNum);
-				req.setAttribute("f3", subjectCd);
-				req.setAttribute("f4", Num);
-
-				req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+				list.remove(copy);
+				continue;
 			}
 
 			//入力された点数を数値型に変換
