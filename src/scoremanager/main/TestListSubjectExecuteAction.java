@@ -55,15 +55,28 @@ public class TestListSubjectExecuteAction extends Action{
 			util.setSubjects(req);
 
 
+			//レスポンス値をセット 6
+			req.setAttribute("f1", entyear);
+			req.setAttribute("f2", classnum);
+			req.setAttribute("f3", subject);
+
+			//JSPへフォワード 7
 			req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 
 		}else{
 			errors.put("error1", "入学年度とクラスと科目を選択してください");
 			req.setAttribute("error", errors);
+
 			util.setClassNumSet(req);
 			util.setEntyearSet(req);
 			util.setSubjects(req);
 
+			//レスポンス値をセット 6
+			req.setAttribute("f1", entyear);
+			req.setAttribute("f2", classnum);
+			req.setAttribute("f3", subject);
+
+			//JSPへフォワード 7
 			req.getRequestDispatcher("test_list.jsp").forward(req, res);
 		}
 
@@ -75,9 +88,9 @@ public class TestListSubjectExecuteAction extends Action{
 		//DBへデータ保存 5
 		//なし
 
-		//レスポンス値をセット 6
+
 		// リクエストに科目リストをセット
-		//JSPへフォワード 7
+
 
 	}
 }

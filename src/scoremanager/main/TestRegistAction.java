@@ -69,17 +69,14 @@ public class TestRegistAction extends Action {
 			req.setAttribute("subjectName", subjectName);
 			req.setAttribute("num", Num);
 
-			//リクエストに値をセット
-			req.setAttribute("f1", entYearStr);
-			req.setAttribute("f2", classNum);
-			req.setAttribute("f3", subjectCd);
-			req.setAttribute("f4", Num);
+
 
 
 			}//1つでも値が入力されていたとき…入力が不足しているとき
 			else {
 				errors.put("test", "入学年度とクラスと科目と回数を選択してください");
 				req.setAttribute("errors", errors);
+
 			}
 		}
 
@@ -91,6 +88,10 @@ public class TestRegistAction extends Action {
 		//なし
 
 		//レスポンス値をセット 6
+		req.setAttribute("f1", entYearStr);
+		req.setAttribute("f2", classNum);
+		req.setAttribute("f3", subjectCd);
+		req.setAttribute("f4", Num);
 
 
 		//JSPへフォワード 7
