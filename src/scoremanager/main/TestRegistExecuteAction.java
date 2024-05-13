@@ -39,6 +39,7 @@ public class TestRegistExecuteAction extends Action {
 
 		//ビジネスロジック
 		for (Test test : list) {
+			//インスタンスの深いコピー
 			Test copy = new Test();
 			copy.setClassNum(test.getClassNum());
 			copy.setSchool(test.getSchool());
@@ -50,9 +51,10 @@ public class TestRegistExecuteAction extends Action {
 			//点数を文字列型で取得
 			String point =	req.getParameter("point_" + test.getStudent().getNo());
 
-			//空文字の場合、リストから削除
+			//空文字の場合、点数に-1を指定して追加
 			if(point.equals("")){
-				list.remove(copy);
+				copy.setPoint(-1);
+				lists.add(copy);
 				continue;
 			}
 

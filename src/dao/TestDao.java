@@ -235,11 +235,28 @@ public class TestDao extends Dao {
 					statement.setString(2, test.getSubject().getCd());
 					statement.setString(3, test.getSchool().getCd());
 					statement.setInt(4, test.getNo());
-					statement.setInt(5, test.getPoint());
+
+					//-1が保存されてない場合
+					if(test.getPoint() != -1){
+						statement.setInt(5, test.getPoint());
+					}
+					else{//-1が保存されていた場合
+						//点数にnullを保存
+						statement.setObject(5, null);
+					}
+
 					statement.setString(6, test.getClassNum());
 					} else {
 						statement = connection.prepareStatement("update test set point=? where student_no=? and subject_cd=? and school_cd=? and no=?");
-						statement.setInt(1, test.getPoint());
+						//-1が保存されてない場合
+						if(test.getPoint() != -1){
+							statement.setInt(1, test.getPoint());
+						}
+						else{//-1が保存されていた場合
+							//点数にnullを保存
+							statement.setObject(1, null);
+						}
+
 						statement.setString(2,test.getStudent().getNo() );
 						statement.setString(3, test.getSubject().getCd());
 						statement.setString(4, test.getSchool().getCd());
