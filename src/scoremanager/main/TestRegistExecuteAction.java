@@ -41,7 +41,6 @@ public class TestRegistExecuteAction extends Action {
 		for (Test test : list) {
 			//点数を文字列型で取得
 			String point =	req.getParameter("point_" + test.getStudent().getNo());
-			System.out.print(point.equals(""));
 
 			//空文字列でないか確認
 			if(point.equals("")){

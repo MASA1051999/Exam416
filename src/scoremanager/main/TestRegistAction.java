@@ -74,7 +74,6 @@ public class TestRegistAction extends Action {
 			req.setAttribute("f2", classNum);
 			req.setAttribute("f3", subjectCd);
 			req.setAttribute("f4", Num);
-			req.setAttribute("f5", student_list);
 
 
 			}//1つでも値が入力されていたとき…入力が不足しているとき

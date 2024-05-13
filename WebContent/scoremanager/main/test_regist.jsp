@@ -59,6 +59,10 @@
 		<c:when test="${test_list.size()>0}">
 			<h2>科目：${subjectName}(${num}回)</h2>
 			<form action="TestRegistExecute.action">
+				<%-- 0～100の範囲で入力してください、と表示する --%>
+					<div>${errors.get("point")}</div>
+				<%-- 値を入力してください、と表示する --%>
+					<div>${errors.get("null_point")}</div>
 				<table class="table table-hover">
 					<tr>
 						<th>入学年度</th>
@@ -83,10 +87,6 @@
 										<input type="number" name="point_${test.student.no}"/>
 									</c:if>
 
-									<%-- 0～100の範囲で入力してください、と表示する --%>
-										<div>${errors.get("point")}</div>
-									<%-- 値を入力してください、と表示する --%>
-										<div>${errors.get("null_point")}</div>
 								</td>
 							</tr>
 						</c:forEach>
