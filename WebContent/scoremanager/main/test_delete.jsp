@@ -22,7 +22,7 @@
 		<input type="submit" value="削除">
 	</form>
 
-	<a href="TestList.action">戻る</a>
+	<a href="TestRegist.action">戻る</a>
 
 
 
