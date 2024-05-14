@@ -8,7 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>科目管理システム</title>
 </head>
+
+<c:import url="header.jsp"></c:import>
+
 <body>
+
+<%@ include file="navigation.jsp" %>
 
 	<h2>科目管理</h2>
 	<a href="SubjectCreate.action">新規登録</a>

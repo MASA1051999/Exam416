@@ -7,7 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
 </head>
+
+<c:import url="header.jsp"></c:import>
+
 <body>
+
+<%@ include file="navigation.jsp" %>
+
 	<h2>科目情報削除</h2>
 
 	<form action = "SubjectDeleteExecute.action" method="post">

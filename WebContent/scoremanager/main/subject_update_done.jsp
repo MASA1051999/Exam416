@@ -8,7 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>科目管理システム</title>
 </head>
+
+<c:import url="header.jsp"></c:import>
+
 <body>
+
+<%@ include file="navigation.jsp" %>
 
 	<h2>科目情報変更</h2>
 	<label>変更が完了しました</label>

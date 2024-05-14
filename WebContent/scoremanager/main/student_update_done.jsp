@@ -8,7 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
 </head>
+
+<c:import url="header.jsp"></c:import>
+
 <body>
+
+<%@ include file="navigation.jsp" %>
+
 	<h2>学生情報変更</h2>
 		<p>変更が完了しました</p>
 	<a href="StudentList.action">学生一覧</a>
