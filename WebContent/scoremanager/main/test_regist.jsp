@@ -93,7 +93,11 @@
 									</c:if>
 
 								</td>
-								<td><a href="TestDelete.action?studentcd=${test.student.no}&subjectcd=${subject.cd}&num=${num}&user=${user.school.cd}&point=${test.point}">削除</a></td>
+								<td>
+									<c:if test="${test.point != -1}">
+										<a href="TestDelete.action?studentcd=${test.student.no}&subjectcd=${subject.cd}&num=${num}&user=${user.school.cd}&point=${test.point}">削除</a>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 				</table>
