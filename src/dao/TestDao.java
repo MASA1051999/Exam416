@@ -117,22 +117,24 @@ public class TestDao extends Dao {
 
 		ResultSet rSet = null;
 
-		String condition = " where ent_year=? and student.class_num=? and (subject_cd=? or subject_cd is null) and (test.no=? or test.no is null) and student.school_cd=?";
+		String condition = " where ent_year=? and student.class_num=? and student.school_cd=?";
 
 		String order = " order by student_no asc";
 
 		try{
 
 			//プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select ent_year, student.class_num, student.no as student_no, isnull(subject_cd, ?) as subject_cd, coalesce(test.no, ?) as no, coalesce(point, -1) as point from test right outer join student on test.student_no = student.no"+ condition  + order );
+			statement = connection.prepareStatement("select ent_year, student.class_num, student.no as student_no, coalesce(subject_cd, ?) as subject_cd, coalesce(test.no, ?) as no, coalesce(point, -1) as point"
+					//テストの科目コードが 'A01' 行かつ、テスト番号が 1の行を結合対象にする
+					+ " from student left outer join test on test.student_no = student.no and test.school_cd = student.school_cd and test.subject_cd = ? and test.no = ?"+ condition  + order );
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1, subject.getCd());
 			statement.setInt(2, num);
-			statement.setInt(3, entYear);
-			statement.setString(4, classNum);
-			statement.setString(5, subject.getCd());
-			statement.setInt(6, num);
+			statement.setString(3, subject.getCd());
+			statement.setInt(4, num);
+			statement.setInt(5, entYear);
+			statement.setString(6, classNum);
 			statement.setString(7, school.getCd());
 
 			//プリペアードステートメントを実行

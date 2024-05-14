@@ -6,13 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
 </head>
-<body>
 
 <%@ include file="../header.jsp" %>
 
-<!--
+<body>
+
+
 <%@ include file="../navigation.jsp" %>
--->
+
 
 <h2>メニュー</h2>
 

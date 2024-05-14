@@ -55,6 +55,7 @@ public class TestRegistExecuteAction extends Action {
 			if(point.equals("")){
 				copy.setPoint(-1);
 				lists.add(copy);
+//				lists.remove(copy);
 				continue;
 			}
 

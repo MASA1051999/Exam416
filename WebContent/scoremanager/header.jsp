@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1>得点管理システム</h1>
 
-<c:if test="${user != null}">
+<c:if test="${user.isAuthenticated()}">
 	<span>${user.name}様</span>
-	<a href="../Logout.action">ログアウト</a>
+	<a href="Logout.action">ログアウト</a>
 </c:if>

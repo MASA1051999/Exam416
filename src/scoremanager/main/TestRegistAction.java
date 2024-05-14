@@ -70,7 +70,7 @@ public class TestRegistAction extends Action {
 
 			//テストが存在しない場合
 			if(list.size() == 0){
-				errors.put("test_null", "テストが存在しませんでした");
+				errors.put("test_null", "対応する学生が存在しませんでした");
 				req.setAttribute("errors",errors);
 			}
 
