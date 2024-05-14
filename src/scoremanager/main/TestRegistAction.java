@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.StudentDao;
@@ -29,7 +30,7 @@ public class TestRegistAction extends Action {
 		StudentDao sDao = new StudentDao();//学生Daoを初期化
 		Util util = new Util();//utilの初期化
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
-		String subjectName = "";//科目名を初期化
+		Subject subject = new Subject();//科目名を初期化
 		int testNum = 0;
 
 
@@ -60,13 +61,13 @@ public class TestRegistAction extends Action {
 			//テスト回数を整数に直す
 			testNum = Integer.parseInt(Num);
 			//科目名を取得
-			subjectName = subjectDao.get(subjectCd, teacher.getSchool()).getName();
+			subject = subjectDao.get(subjectCd, teacher.getSchool());
 			// リクエストパラメータの情報をもとにテストの一覧を取得
 			List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get(subjectCd, teacher.getSchool()),testNum, teacher.getSchool());
 
 			//リクエストにテストリスト、科目名、試験回数をセット
 			req.setAttribute("test_list", list);
-			req.setAttribute("subjectName", subjectName);
+			req.setAttribute("subject", subject);
 
 			//テストが存在しない場合
 			if(list.size() == 0){

@@ -8,13 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
 </head>
-
-<c:import url="header.jsp"></c:import>
-
 <body>
-
-<%@ include file="navigation.jsp" %>
-
 	<h2>成績管理</h2>
 	<form action = "TestRegist.action" method="post">
 
@@ -68,7 +62,7 @@
 
 		<%-- テストが存在する場合 --%>
 		<c:when test="${test_list.size()>0}">
-			<h2>科目：${subjectName}(${num}回)</h2>
+			<h2>科目：${subject.name}(${num}回)</h2>
 			<form action="TestRegistExecute.action">
 				<%-- 0～100の範囲で入力してください、と表示する --%>
 					<div>${errors.get("point")}</div>
@@ -99,6 +93,7 @@
 									</c:if>
 
 								</td>
+								<td><a href="TestDelete.action?studentcd=${test.student.no}&subjectcd=${subject.cd}&num=${num}&user=${user.school.cd}&point=${test.point}">削除</a></td>
 							</tr>
 						</c:forEach>
 				</table>
@@ -112,8 +107,6 @@
 			<input type="submit" value="登録して終了"></form>
 		</c:when>
 	</c:choose>
-
-<%@ include file="footer.jsp" %>
 
 </body>
 </html>
