@@ -8,7 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
 </head>
+
+<c:import url="header.jsp"></c:import>
+
 <body>
+
+<%@ include file="navigation.jsp" %>
+
 	<h2>成績管理</h2>
 	<form action = "TestRegist.action" method="post">
 
@@ -111,6 +117,8 @@
 			<input type="submit" value="登録して終了"></form>
 		</c:when>
 	</c:choose>
+
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>

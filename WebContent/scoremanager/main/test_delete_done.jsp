@@ -7,15 +7,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>科目管理システム</title>
+
+<c:import url="header.jsp"></c:import>
+
 </head>
 <body>
+
+<%@ include file="navigation.jsp" %>
 
 	<h2>テスト削除完了</h2>
 	<label>削除が完了しました</label>
 
 	<a href="TestRegist.action">戻る</a>
 
-
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>

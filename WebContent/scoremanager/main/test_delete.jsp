@@ -6,8 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
+
+<c:import url="header.jsp"></c:import>
+
 </head>
 <body>
+
+<%@ include file="navigation.jsp" %>
+
 	<h2>成績情報削除</h2>
 
 	<form action = "TestDeleteExecute.action" method="post">
@@ -24,7 +30,7 @@
 
 	<a href="TestRegist.action">戻る</a>
 
-
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>
