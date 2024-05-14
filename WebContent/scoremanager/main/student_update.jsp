@@ -47,5 +47,7 @@
 
 	<a href="StudentList.action">戻る</a>
 
+<%@ include file="footer.jsp" %>
+
 </body>
 </html>

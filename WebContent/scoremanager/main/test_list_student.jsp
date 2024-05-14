@@ -92,5 +92,7 @@
 			</c:when>
 		</c:choose>
 
+<%@ include file="footer.jsp" %>
+
 </body>
 </html>

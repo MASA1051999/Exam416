@@ -70,5 +70,7 @@
 		<p>科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
 	</c:if>
 
+<%@ include file="footer.jsp" %>
+
 </body>
 </html>
