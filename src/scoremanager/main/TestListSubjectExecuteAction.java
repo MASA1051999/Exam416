@@ -74,7 +74,9 @@ public class TestListSubjectExecuteAction extends Action{
 			//レスポンス値をセット 6
 			req.setAttribute("f1", entyear);
 			req.setAttribute("f2", classnum);
-			req.setAttribute("f3", subject.getName());
+			if(subject != null){
+				req.setAttribute("f3", subject.getName());
+			}
 
 			//JSPへフォワード 7
 			req.getRequestDispatcher("test_list.jsp").forward(req, res);
