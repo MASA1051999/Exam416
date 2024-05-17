@@ -1,16 +1,30 @@
 @CHARSET "UTF-8";
 
-div#content{
+div.align-items-center{/* 見出しの中央揃え */
+	text-align: center;
+}
+
+div.align-self-end{/* ログインユーザー表示を右寄せ*/
+	text-align: right;
+}
+
+div#content{/* 親属性に高さを認識させる */
 	overflow: hidden;
 	width: 100%;
 }
 
 div#nav{
-	float: left;
-	width: 30%;
+	float: left;/* 左寄せで配置*/
+	width: 19%;
+	border-right: 1px solid;/* 縦線の表示 */
 }
 
 div#main{
-	float: left;
-	width: 70%;
+	text-align: center;/* メニュー要素の中央揃え */
+	float: right;/* 右寄せで配置 */
+	width: 80%;
+}
+
+p.text-center{/* フッターの中央揃え */
+	text-align: center;
 }
