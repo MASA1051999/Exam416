@@ -8,21 +8,45 @@ div.align-self-end{/* ログインユーザー表示を右寄せ*/
 	text-align: right;
 }
 
+
 div#content{/* 親属性に高さを認識させる */
 	overflow: hidden;
 	width: 100%;
 }
 
+/* サイドバー */
 div#nav{
 	float: left;/* 左寄せで配置*/
 	width: 19%;
 	border-right: 1px solid;/* 縦線の表示 */
 }
 
+ul{/* リストのスタイル指定 */
+	list-style: none;
+}
+
+/* メニュー要素 */
 div#main{
 	text-align: center;/* メニュー要素の中央揃え */
 	float: right;/* 右寄せで配置 */
 	width: 80%;
+	overflow: hidden;
+}
+
+/* 学生管理、成績管理、科目管理を横並びで表示 */
+div.stu{
+	float: left;/* 左寄せで配置*/
+	width: 33%;
+}
+
+div.test{
+	float: left;/* 左寄せで配置*/
+	width: 33%;
+}
+
+div.sub{
+	float: left;/* 左寄せで配置*/
+	width: 33%;
 }
 
 p.text-center{/* フッターの中央揃え */

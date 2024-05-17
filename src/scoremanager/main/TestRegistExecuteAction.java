@@ -38,6 +38,9 @@ public class TestRegistExecuteAction extends Action {
 		List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get(subjectCd, teacher.getSchool()),Integer.parseInt(Num), teacher.getSchool());
 
 		//ビジネスロジック
+		//ループを管理する変数
+		boolean roop = true;
+
 		for (Test test : list) {
 			//インスタンスの深いコピー
 			Test copy = new Test();
@@ -63,29 +66,8 @@ public class TestRegistExecuteAction extends Action {
 			intpoint = Integer.parseInt(point);
 			//0より小さいか、100より大きい場合
 			if(intpoint<0 || intpoint>100){
-				//エラーメッセージをセット
-				errors.put("point", "0～100の範囲で入力してください");
-				//属性名はerrors
-				req.setAttribute("errors" , errors);
-
-				//リクエストに値をセット
-				util.setClassNumSet(req);
-				util.setEntyearSet(req);
-				util.setSubjects(req);
-				util.setNumSet(req);
-
-				//リクエストにテスト結果一覧、科目名、試験回数をセット
-				req.setAttribute("test_list", list);
-				req.setAttribute("subjectName", subjectDao.get(subjectCd, teacher.getSchool()).getName());
-				req.setAttribute("num", Num);
-
-				req.setAttribute("f1", entYearStr);
-				req.setAttribute("f2", classNum);
-				req.setAttribute("f3", subjectCd);
-				req.setAttribute("f4", Num);
-
-				req.getRequestDispatcher("test_regist.jsp").forward(req, res);
-
+				//ループ変数にfalseを設定
+				roop = false;
 			}
 			//入力値に異常がなかった場合
 			else{
@@ -96,10 +78,39 @@ public class TestRegistExecuteAction extends Action {
 			}
 		}
 
-		//DBへデータ保存 5
-		tDao.save(lists);
+		//ループ変数がtrueのままの場合
+		if(roop){
+			//DBへデータ保存 5
+			tDao.save(lists);
 
-		//追加、更新完了画面へ遷移
-		req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
+			//追加、更新完了画面へ遷移
+			req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
+		}
+		else {
+			//エラーメッセージをセット
+			errors.put("point", "0～100の範囲で入力してください");
+			//属性名はerrors
+			req.setAttribute("errors" , errors);
+
+			//リクエストに値をセット
+			util.setClassNumSet(req);
+			util.setEntyearSet(req);
+			util.setSubjects(req);
+			util.setNumSet(req);
+
+			//リクエストにテスト結果一覧、科目名、試験回数をセット
+			req.setAttribute("test_list", list);
+			req.setAttribute("subjectName", subjectDao.get(subjectCd, teacher.getSchool()).getName());
+			req.setAttribute("num", Num);
+
+			req.setAttribute("f1", entYearStr);
+			req.setAttribute("f2", classNum);
+			req.setAttribute("f3", subjectCd);
+			req.setAttribute("f4", Num);
+
+			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+		}
+
+
 	}
 }
