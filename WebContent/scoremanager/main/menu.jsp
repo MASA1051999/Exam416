@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./style.css"/>
 <title>得点管理システム</title>
 </head>
 
@@ -12,17 +13,23 @@
 
 <body>
 
+<div id="content">
 
-<%@ include file="navigation.jsp" %>
+	<div id="nav">
+		<%@ include file="navigation.jsp" %>
+	</div>
 
+	<div id="main">
+		<h2>メニュー</h2>
 
-<h2>メニュー</h2>
+		<a href="StudentList.action">学生管理</a>
+		<div>成績管理</div>
+		<a href="TestRegist.action">成績登録</a>
+		<a href="TestList.action">成績参照</a>
+		<a href="SubjectList.action">科目管理</a>
+	</div>
 
-<a href="StudentList.action">学生管理</a>
-<div>成績管理</div>
-<a href="TestRegist.action">成績登録</a>
-<a href="TestList.action">成績参照</a>
-<a href="SubjectList.action">科目管理</a>
+</div>
 
 <%@ include file="footer.jsp" %>
 
