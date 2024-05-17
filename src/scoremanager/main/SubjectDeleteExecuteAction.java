@@ -38,7 +38,7 @@ public class SubjectDeleteExecuteAction extends Action {
 			sDao.delete(old);
 
 			//JSPへフォワード 7
-			req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+			req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
 
 		} else {
 			//JSPへフォワード 7
