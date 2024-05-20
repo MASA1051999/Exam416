@@ -5,9 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="main/style.css"/>
 <title>得点管理システム</title>
 </head>
+
 <body>
+
+<c:import url="main/header.jsp"></c:import>
 
 <form action = "LoginExecute.action" method="post">
 
@@ -47,6 +51,8 @@
 	<input type="submit" name="login" value="ログイン"/>
 
 </form>
+
+<%@ include file="main/footer.jsp" %>
 
 <script type="text/javascript">
 	function checkfunction() {
