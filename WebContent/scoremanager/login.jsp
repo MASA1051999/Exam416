@@ -34,11 +34,11 @@
 	<!-- ＩＤ 未入力を許可しない-->
 	<label>ＩＤ</label>
 	<input type="text" name="id" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい"
-	 autocomplete="off" style="ime-mode: disabled" value="K01" required/>
+	 autocomplete="off" style="ime-mode: disabled" value="${id}" required/>
 
 	<!-- パスワード 未入力を許可しない-->
 	<label>パスワード</label>
-	<input type="password" name="password" id="password" value="111" required>
+	<input type="password" name="password" id="password" value="${password}" required>
 
 	<input type="checkbox" name="chk_d_ps" id="check" onchange="checkfunction()">
 	<label for="check">パスワードを表示</label>

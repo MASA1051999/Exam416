@@ -17,11 +17,11 @@ div#content{/* 親属性に高さを認識させる */
 /* サイドバー */
 div#nav{
 	float: left;/* 左寄せで配置*/
-	width: 19%;
+	width: 29%;
 	border-right: 1px solid;/* 縦線の表示 */
 }
 
-ul{/* リストのスタイル指定 */
+ul.nav{/* リストのスタイル指定 */
 	list-style: none;
 }
 
@@ -29,8 +29,13 @@ ul{/* リストのスタイル指定 */
 div#main{
 	text-align: center;/* メニュー要素の中央揃え */
 	float: right;/* 右寄せで配置 */
-	width: 80%;
+	width: 70%;
 	overflow: hidden;
+}
+
+h2.menu{
+	margin-bottom: 50px;
+	background-color: #dbdbdb;
 }
 
 /* 学生管理、成績管理、科目管理を横並びで表示 */
@@ -49,6 +54,7 @@ div.sub{
 	width: 33%;
 }
 
-p.text-center{/* フッターの中央揃え */
+div.footer{/* フッターの中央揃え */
 	text-align: center;
+	background-color: #c0c0c0;
 }

@@ -20,7 +20,7 @@
 	</div>
 
 	<div id="main">
-		<h2>メニュー</h2>
+		<h2 class="menu">メニュー</h2>
 
 		<div class="stu">
 			<a href="StudentList.action">学生管理</a>

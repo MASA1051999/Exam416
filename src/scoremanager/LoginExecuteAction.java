@@ -56,8 +56,9 @@ public class LoginExecuteAction extends Action{
 			errors.put("error", "ログインに失敗しました。IDまたはパスワードが正しくありません。");
 			req.setAttribute("errors", errors);
 
-			//入力されたIDをリクエスト属性に保存
+			//入力されたid。passwordをリクエスト属性に保存
 			req.setAttribute("id", id);
+			req.setAttribute("password", password);
 
 			//JSPへフォワード 7
 			req.getRequestDispatcher("login.jsp").forward(req, res);
