@@ -25,7 +25,7 @@ ul.nav{/* リストのスタイル指定 */
 	list-style: none;
 }
 
-/* メニュー要素 */
+/* メイン要素 */
 div#main{
 	text-align: center;/* メニュー要素の中央揃え */
 	float: right;/* 右寄せで配置 */
