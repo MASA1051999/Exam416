@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="./main/style.css"/>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/exam416/scoremanager/main/style.css"/>
 <title>得点管理システム</title>
 </head>
 
